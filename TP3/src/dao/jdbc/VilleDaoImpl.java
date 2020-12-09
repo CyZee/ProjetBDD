@@ -2,67 +2,69 @@ package dao.jdbc;//package dao.jdbc;
 
 import dao.exception.DaoException;
 import model.Entity;
-import model.Entreprise;
+import model.Ville;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class EntrepriseDaoImpl extends JdbcDao {
+public class VilleDaoImpl extends JdbcDao {
 
-    public EntrepriseDaoImpl(Connection connection) {
+    public VilleDaoImpl(Connection connection) {
         super(connection);
     }
 
     @Override public Collection<Entity> findAll() throws DaoException {
-        Collection<Entity> entreprises = new ArrayList<>();
+        Collection<Entity> ville = new ArrayList<>();
 
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM entreprise");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM ville");
 
             while (resultSet.next()) {
-                Entreprise entreprise = new Entreprise();
-                entreprise.setId(resultSet.getInt("id_entreprise"));
-                entreprise.setNom(resultSet.getString("nomEntreprise"));
-                entreprises.add(entreprise);
+                Ville ville = new Ville();
+                ville.setId(resultSet.getInt("idVille"));
+                ville.setNom(resultSet.getString("nomVille"));
+                ville.setId(resultSet.getInt("nombreHabitants"));
+                ville.add(ville);
             }
         } catch (SQLException e) {
             throw new DaoException(e);
         }
 
-        return entreprises;
+        return ville;
     }
 
     @Override
     public Entity findById(int id) throws DaoException {
 
-       Entreprise entreprise = new Entreprise();
+       Ville ville = new Ville();
 
                try {
                    Statement statement = connexion.createStatement();
-                   ResultSet resultSet = statement.executeQuery("SELECT * FROM entreprise WHERE id_entreprise="+id);
+                   ResultSet resultSet = statement.executeQuery("SELECT * FROM ville WHERE idVille="+id);
 
                    while (resultSet.next()) {
-                       entreprise.setId(resultSet.getInt("id_entreprise"));
-                       entreprise.setNom(resultSet.getString("nomEntreprise"));
+                       ville.setId(resultSet.getInt("idVille"));
+                       ville.setNom(resultSet.getString("nomVille"));
+                       ville.setId(resultSet.getInt("nombreHabitants"));
                    }
                } catch (SQLException e) {
                    System.err.println("Erreur SQL : " + e.getLocalizedMessage());
                }
 
-               return entreprise;
+               return ville;
 
     }
 
     @Override
     public void create(Entity entity) throws DaoException {
 
-        Entreprise entreprise = (Entreprise) entity;
+        Ville ville = (Ville) entity;
 
         PreparedStatement stmt= null;
 
-        String sqlReq = "insert into entreprise(nomEntreprise) values (?)";
+        String sqlReq = "insert into ville(nomVille,nombreHabitants) values (?,?)";
 
         try {
 
@@ -70,7 +72,8 @@ public class EntrepriseDaoImpl extends JdbcDao {
 
             // stmt.setInt(1, 5);
 
-            stmt.setString(1, entreprise.getNom());
+            stmt.setString(1, ville.getNom());
+            stmt.setString(1, ville.getNombreHabitants());
 
             int res = stmt.executeUpdate();
             if (res > 0) {
@@ -87,11 +90,12 @@ public class EntrepriseDaoImpl extends JdbcDao {
     @Override
     public void update(Entity entity) throws DaoException {
         PreparedStatement stmt= null;
-        String sqlReq = "update entreprise set nomEntreprise = ? where id_entreprise = ?";
+        String sqlReq = "update ville set nomVille = ?, nombreHabitants = ? where idVille = ?";
         try {
                     stmt = connexion.prepareStatement(sqlReq);
-                    stmt.setString(1,((Entreprise)entity).getNom());
-                    stmt.setInt(2,((Entreprise) entity).getId());
+                    stmt.setString(1,((Ville)entity).getNom());
+                    stmt.setString(2,((Ville)entity).getNombreHabitants());
+                    stmt.setInt(3,((Ville) entity).getId());
                     stmt.executeUpdate();
                 } catch (SQLException e) {
                     System.err.println("Erreur SQL : " + e.getLocalizedMessage());
@@ -101,11 +105,11 @@ public class EntrepriseDaoImpl extends JdbcDao {
     @Override
     public void delete(Entity entity) throws DaoException {
         PreparedStatement stmt= null;
-        String sqlReq = "delete from entreprise where id_entreprise = ?";
+        String sqlReq = "delete from ville where idVille = ?";
 
         try {
                     stmt = connexion.prepareStatement(sqlReq);
-                    stmt.setInt(1,((Entreprise) entity).getId());
+                    stmt.setInt(1,((Ville) entity).getId());
                     stmt.executeUpdate();
                 } catch (SQLException e) {
                     System.err.println("Erreur SQL : " + e.getLocalizedMessage());

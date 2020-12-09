@@ -1,27 +1,29 @@
 package model;//package model;
 
-public class Entreprise extends Entity {
+public class Ville extends Entity {
 
     private int id;
     private String nom;
+    private int nombreHabitants;
 
-    public Entreprise() {
+    public Ville() {
         this(0);
     }
 
-    public Entreprise(int id) {
+    public Ville(int id) {
         this(id, null);
     }
 
-    public Entreprise(String nom) {
+    public Ville(String nom) {
         this.nom = nom;
     }
 
-    public Entreprise(int id, String nom) {
+    public Ville(int id, String nom, int nombreHabitants) {
         super();
 
         this.id = id;
         this.nom = nom;
+        this.nombreHabitants = nombreHabitants;
     }
 
     public int getId() {
@@ -39,4 +41,13 @@ public class Entreprise extends Entity {
     public void setNom(String nom) {
         this.nom = nom;
     }
+
+    public int getNombreHabitants(){
+        return nombreHabitants;
+
+    }
+
+    public void setNombreHabitants(String nombreHabitants) {
+            this.nombreHabitants = nombreHabitants;
+        }
 }
