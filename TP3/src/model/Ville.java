@@ -14,8 +14,8 @@ public class Ville extends Entity {
         this(id, null);
     }
 
-    public Ville(String nom) {
-        this.nom = nom;
+    public Ville(int id, String nom){
+        this(id, nom, 0);
     }
 
     public Ville(int id, String nom, int nombreHabitants) {
@@ -42,12 +42,11 @@ public class Ville extends Entity {
         this.nom = nom;
     }
 
-    public int getNombreHabitants(){
+    public int getNombreHabitants() {
         return nombreHabitants;
-
     }
 
-    public void setNombreHabitants(String nombreHabitants) {
-            this.nombreHabitants = nombreHabitants;
-        }
+    public void setNombreHabitants(int nombreHabitants) {
+        this.nombreHabitants = nombreHabitants;
+    }
 }

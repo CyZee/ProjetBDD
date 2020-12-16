@@ -6,19 +6,19 @@ public class Agence extends Entity {
     private int nbEmployes;
     private Ville ville;
 
-    public Ville() {
+    public Agence() {
         this(0);
     }
 
-    public Ville(int id) {
-        this(id, null);
+    public Agence(int id) {
+        this(id, 0);
     }
 
-    public Ville(int id, int nbEmployes) {
+    public Agence(int id, int nbEmployes) {
         this(id, nbEmployes, null);
     }
 
-    public Ville(int id, int nbEmployes, Ville ville) {
+    public Agence(int id, int nbEmployes, Ville ville) {
         super();
 
         this.id = id;

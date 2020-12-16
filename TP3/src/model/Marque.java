@@ -5,19 +5,15 @@ public class Marque extends Entity {
     private int id;
     private String nomMarque;
 
-    public Ville() {
+    public Marque() {
         this(0);
     }
 
-    public Ville(int id) {
+    public Marque(int id) {
         this(id, null);
     }
 
-    public Ville(int id, String nomMarque) {
-        this(id, nomMarque, null);
-    }
-
-    public Ville(int id, String nomMarque) {
+    public Marque(int id, String nomMarque) {
         super();
 
         this.id = id;
@@ -33,13 +29,12 @@ public class Marque extends Entity {
         this.id = id;
     }
 
-    public int getNomMarque() {
+    public String getNomMarque() {
         return nomMarque;
     }
 
     public void setNomMarque(String nomMarque) {
         this.nomMarque = nomMarque;
     }
-
 
 }
