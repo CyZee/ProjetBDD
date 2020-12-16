@@ -4,12 +4,26 @@ import dao.Dao;
 import dao.jdbc.VilleDaoImpl;
 import dao.jdbc.AganceDaoImpl;
 import dao.jdbc.MarqueDaoImpl;
+import dao.jdbc.ClientDaoImpl;
+import dao.jdbc.VehiculeDaoImpl;
+import dao.jdbc.TypeDaoImpl;
+import dao.jdbc.CategorieDaoImpl;
+import dao.jdbc.ModeleDaoImpl;
+import dao.jdbc.ContratDaoImpl;
+import dao.jdbc.FactureDaoImpl;
 import dao.exception.DaoException;
-//import dao.jdbc.EtudiantDaoImpl;
+
 import model.Entity;
 import model.Ville;
 import model.Agance;
 import model.Marque;
+import model.Client;
+import model.Vehicule;
+import model.Type;
+import model.Cetagorie;
+import model.Modele;
+import model.Contrat;
+import model.Facture;
 import sql.PostgresConnection;
 
 import java.sql.Connection;
@@ -297,10 +311,90 @@ public class SimpleJdbcDaoTest {
 
         System.out.println("***** Création d'une agance : ");
         Agance agance = new Agance("bruhAndCo");
-        testCreateVille(ville);
+        testCreateAgance(agance);
 
-        System.out.println("***** Liste des villes : ");
-        testFindAllVille();
+        System.out.println("***** Liste des agances : ");
+        testFindAllAgance();
+
+
+        dao = new MarqueDaoImpl(connection);
+
+        System.out.println("***** Création d'une marque : ");
+        Marque marque = new Marque("bruh");
+        testCreateMarque(marque);
+
+        System.out.println("***** Liste des marque : ");
+        testFindAllMarque();
+
+
+        dao = new ClientDaoImpl(connection);
+
+        System.out.println("***** Création d'un client : ");
+        Client client = new Client("Jean_bruh");
+        testCreateClient(client);
+
+        System.out.println("***** Liste des clients : ");
+        testFindAllClient();
+
+
+        dao = new VehiculeDaoImpl(connection);
+
+        System.out.println("***** Création d'un vehicule : ");
+        Vehicule vehicule = new Vehicule("bruhMobile");
+        testCreateVehicule(vehicule);
+
+        System.out.println("***** Liste des vehicules : ");
+        testFindAllVehicule();
+
+
+        dao = new TypeDaoImpl(connection);
+
+        System.out.println("***** Création d'un type : ");
+        Type type = new Type("bruuuuuh");
+        testCreateType(type);
+
+        System.out.println("***** Liste des types : ");
+        testFindAllType();
+
+
+        dao = new CategorieDaoImpl(connection);
+
+        System.out.println("***** Création d'une categorie : ");
+        Categorie categorie = new Categorie("bruhed");
+        testCreateCategorie(categorie);
+
+        System.out.println("***** Liste des categories : ");
+        testFindAllCategorie();
+
+
+        dao = new ModeleDaoImpl(connection);
+
+        System.out.println("***** Création d'un modele : ");
+        Modele modele = new modele("bruh2000");
+        testCreateModele(modele);
+
+        System.out.println("***** Liste des Modeles : ");
+        testFindAllModele();
+
+
+        dao = new ContratDaoImpl(connection);
+
+        System.out.println("***** Création d'un contrat : ");
+        Contrat contrat = new Contrat("bruh.txt");
+        testCreateContrat(contrat);
+
+        System.out.println("***** Liste des contrats : ");
+        testFindAllContrat();
+
+
+        dao = new FactureDaoImpl(connection);
+
+        System.out.println("***** Création d'une facture : ");
+        Facture facture = new Facture("bruhBill");
+        testCreateFacture(facture);
+
+        System.out.println("***** Liste des factures : ");
+        testFindAllFacture();
     }
 
 
