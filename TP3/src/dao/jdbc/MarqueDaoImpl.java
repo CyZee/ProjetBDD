@@ -40,7 +40,7 @@ public class MarqueDaoImpl extends JdbcDao {
                     while (resultSet.next()) {
                         Marque marque1 = new Marque();
                         marque1.setId(resultSet.getInt("id"));
-                        marque1.setNomMarque(resultSet.getString("nomMarque"));
+                        marque1.setnomMarque(resultSet.getString("nomMarque"));
                         marque1.add(marque1);
                     }
                 } catch (SQLException e) {
@@ -62,7 +62,7 @@ public class MarqueDaoImpl extends JdbcDao {
 
 
                 marque.setId(resultSet.getInt("id"));
-                marque.setNomMarque(resultSet.getString("nomMarque"));
+                marque.setnomMarque(resultSet.getString("nomMarque"));
 
 
             }
@@ -80,14 +80,14 @@ public class MarqueDaoImpl extends JdbcDao {
 
         PreparedStatement stmt= null;
 
-        String sqlReq = "insert into marque(nomMarque) values (?)";
+        String sqlReq = "insert into marque(\"nomMarque\") values (?)";
 
         try {
 
             stmt = connection.prepareStatement(sqlReq);
 
             stmt = connection.prepareStatement(sqlReq);
-            stmt.setString(1, ((Marque)entity).getNomMarque());
+            stmt.setString(1, ((Marque)entity).getnomMarque());
 
 
 
@@ -105,10 +105,10 @@ public class MarqueDaoImpl extends JdbcDao {
     @Override
     public void update(Entity entity) throws DaoException {
         PreparedStatement stmt= null;
-        String sqlReq = "update marque set nomMarque = ? where id = ?";
+        String sqlReq = "update marque set \"nomMarque\" = ? where id = ?";
         try {
             stmt = connection.prepareStatement(sqlReq);
-            stmt.setString(1,((Marque)entity).getNomMarque());
+            stmt.setString(1,((Marque)entity).getnomMarque());
 
 
             stmt.setInt(2,((Marque) entity).getId());

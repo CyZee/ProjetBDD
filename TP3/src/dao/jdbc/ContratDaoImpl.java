@@ -49,7 +49,7 @@ public class ContratDaoImpl extends JdbcDao {
                 contrat1.setKmRetrait(resultSet.getInt("kmRetrait"));
                 contrat1.setKmRetour(resultSet.getInt("kmRetour"));
                 contrat1.setClient((Client)client.findById(resultSet.getInt("client")));
-                contrat1.setVehicule((Vehicule)vehicule.findById(resultSet.getInt("vehicule")));
+                contrat1.setVehicule((Vehicule)vehicule.findById(resultSet.getInt("immatriculation")));
                 contrat1.setAgence((Agence)agence.findById(resultSet.getInt("agence")));
                 contrat1.add(contrat1);
             }
@@ -82,7 +82,7 @@ public class ContratDaoImpl extends JdbcDao {
                 contrat.setKmRetrait(resultSet.getInt("kmRetrait"));
                 contrat.setKmRetour(resultSet.getInt("kmRetour"));
                 contrat.setClient((Client)client.findById(resultSet.getInt("client")));
-                contrat.setVehicule((Vehicule)vehicule.findById(resultSet.getInt("vehicule")));
+                contrat.setVehicule((Vehicule)vehicule.findById(resultSet.getInt("immatriculation")));
                 contrat.setAgence((Agence) agence.findById(resultSet.getInt("agence")));
 
 
@@ -102,7 +102,7 @@ public class ContratDaoImpl extends JdbcDao {
 
         PreparedStatement stmt= null;
 
-        String sqlReq = "insert into contart(dateDeRetrait,dateDeRetour,kmRetrait,kmRetour,client,vehicule,agence) values (?,?,?,?,?,?,?)";
+        String sqlReq = "insert into contrat(\"dateDeRetrait\",\"dateDeRetour\",\"kmRetrait\",\"kmRetour\",client,immatriculation,agence) values (?,?,?,?,?,?,?)";
 
         try {
 
@@ -134,7 +134,7 @@ public class ContratDaoImpl extends JdbcDao {
     @Override
     public void update(Entity entity) throws DaoException {
         PreparedStatement stmt= null;
-        String sqlReq = "update contrat set dateDeRetrait = ?, dateDeRetour = ?, kmRetrait = ?, kmRetour = ?, client = ?, vehicule = ?, agence = ?  where id = ?";
+        String sqlReq = "update contrat set \"dateDeRetrait\" = ?, \"dateDeRetour\" = ?, \"kmRetrait\" = ?, \"kmRetour\" = ?, client = ?, immatriculation = ?, agence = ?  where id = ?";
         try {
             stmt = connection.prepareStatement(sqlReq);
             stmt.setString(1, ((Contrat)entity).getDateDeRetrait());
@@ -174,7 +174,7 @@ public class ContratDaoImpl extends JdbcDao {
 
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT contrat.dateRetour FROM contrat WHERE id="+id);
+            ResultSet resultSet = statement.executeQuery("SELECT contrat.\"dateDeRetour\" FROM contrat WHERE id="+id);
 
             while (resultSet.next()) {
                 VehiculeDaoImpl vehicule = new VehiculeDaoImpl(connection);

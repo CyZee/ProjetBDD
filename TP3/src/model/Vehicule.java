@@ -76,11 +76,11 @@ public  class Vehicule extends Entity {
         this.id = id;
     }
 
-    public String getDateMiseEnCirculation() {
+    public String getdateMiseEnCirculation() {
         return dateMiseEnCirculation;
     }
 
-    public void setDateMiseEnCirculation(String dateMiseEnCirculation) {
+    public void setdateMiseEnCirculation(String dateMiseEnCirculation) {
         this.dateMiseEnCirculation = dateMiseEnCirculation;
     }
 

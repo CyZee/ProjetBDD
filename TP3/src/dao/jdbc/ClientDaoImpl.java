@@ -42,9 +42,9 @@ public class ClientDaoImpl extends JdbcDao {
 
                 Client client1 = new Client();
                 client1.setId(resultSet.getInt("id"));
-                client1.setNom(resultSet.getString("nom"));
-                client1.setAdresse(resultSet.getString("adresse"));
-                client1.setCodePostal(resultSet.getString("codePostale"));
+                client1.setNom(resultSet.getString("nomClient"));
+                client1.setAdresse(resultSet.getString("adresseClient"));
+                client1.setCodePostal(resultSet.getString("codePostalClient"));
                 client1.setVille((Ville)ville.findById(resultSet.getInt("ville")));
                 client1.add(client1);
             }
@@ -67,9 +67,9 @@ public class ClientDaoImpl extends JdbcDao {
                 VilleDaoImpl ville = new VilleDaoImpl(connection);
 
                 client.setId(resultSet.getInt("id"));
-                client.setNom(resultSet.getString("nom"));
-                client.setAdresse(resultSet.getString("adresse"));
-                client.setCodePostal(resultSet.getString("codePostale"));
+                client.setNom(resultSet.getString("nomClient"));
+                client.setAdresse(resultSet.getString("adresseClient"));
+                client.setCodePostal(resultSet.getString("codePostalClient"));
 
                 client.setVille((Ville) ville.findById(resultSet.getInt("ville")));
 
@@ -88,7 +88,7 @@ public class ClientDaoImpl extends JdbcDao {
 
         PreparedStatement stmt= null;
 
-        String sqlReq = "insert into client(nom,adresse,codePostale,ville) values (?,?,?,?)";
+        String sqlReq = "insert into client(\"nomClient\",\"adresseClient\",\"codePostalClient\",ville) values (?,?,?,?)";
 
         try {
 
@@ -116,7 +116,7 @@ public class ClientDaoImpl extends JdbcDao {
     @Override
     public void update(Entity entity) throws DaoException {
         PreparedStatement stmt= null;
-        String sqlReq = "update client set nom = ?,adresse = ?, codePostale = ?, ville = ? where id = ?";
+        String sqlReq = "update client set \"nomClient\" = ?,\"adresseClient\" = ?, \"codePostalClient\" = ?, ville = ? where id = ?";
         try {
             stmt = connection.prepareStatement(sqlReq);
             stmt.setString(1,((Client)entity).getNom());

@@ -112,7 +112,7 @@ public class SimpleJdbcDaoTest {
             Collection<Entity> marque = dao.findAll();
             for (Entity entity : marque){
                 Marque marque1 = (Marque) entity;
-                System.out.println(marque1.getId() + " | " + marque1.getNomMarque());
+                System.out.println(marque1.getId() + " | " + marque1.getnomMarque());
             }
         }catch(DaoException e){
             e.printStackTrace();
@@ -158,7 +158,7 @@ public class SimpleJdbcDaoTest {
             Collection<Entity> vehicule = dao.findAll();
             for (Entity entity : vehicule){
                 Vehicule vehicule1 = (Vehicule) entity;
-                System.out.println(vehicule1.getId() + " | " + vehicule1.getDateMiseEnCirculation() + " | " + vehicule1.getEtat() + " | " + vehicule1.getNbKilometres() + " | " + vehicule1.getPrixParJourDeLocation() + " | " + vehicule1.getMarque() + " | " + vehicule1.getModele() + " | " + vehicule1.getCategorie() + " | " + vehicule1.getType() + " | " + vehicule1.getAgence());
+                System.out.println(vehicule1.getId() + " | " + vehicule1.getdateMiseEnCirculation() + " | " + vehicule1.getEtat() + " | " + vehicule1.getNbKilometres() + " | " + vehicule1.getPrixParJourDeLocation() + " | " + vehicule1.getMarque() + " | " + vehicule1.getModele() + " | " + vehicule1.getCategorie() + " | " + vehicule1.getType() + " | " + vehicule1.getAgence());
             }
         }catch(DaoException e){
             e.printStackTrace();

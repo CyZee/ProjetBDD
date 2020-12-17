@@ -35,7 +35,7 @@ public class ModeleDaoImpl extends JdbcDao {
 
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM marque");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM modele");
 
             while (resultSet.next()) {
                 Modele modele1 = new Modele();
@@ -82,7 +82,7 @@ public class ModeleDaoImpl extends JdbcDao {
 
         PreparedStatement stmt= null;
 
-        String sqlReq = "insert into modele(libelle,puissanceFiscale) values (?,?)";
+        String sqlReq = "insert into modele(libelle,\"puissanceFiscale\") values (?,?)";
 
         try {
 
@@ -108,7 +108,7 @@ public class ModeleDaoImpl extends JdbcDao {
     @Override
     public void update(Entity entity) throws DaoException {
         PreparedStatement stmt= null;
-        String sqlReq = "update modele set libelle = ?, puissanceFiscale = ? where id = ?";
+        String sqlReq = "update modele set libelle = ?, \"puissanceFiscale\" = ? where id = ?";
         try {
             stmt = connection.prepareStatement(sqlReq);
             stmt.setString(1,((Modele)entity).getLibelle());

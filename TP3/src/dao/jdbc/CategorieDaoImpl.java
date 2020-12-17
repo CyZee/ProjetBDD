@@ -35,7 +35,7 @@ public class CategorieDaoImpl extends JdbcDao {
 
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM marque");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM categorie");
 
             while (resultSet.next()) {
                 Categorie categorie1 = new Categorie();

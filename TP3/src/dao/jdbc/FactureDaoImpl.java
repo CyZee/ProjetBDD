@@ -35,7 +35,7 @@ public class FactureDaoImpl extends JdbcDao {
 
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM marque");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM facture");
 
             while (resultSet.next()) {
                 ContratDaoImpl contrat = new ContratDaoImpl(connection);

@@ -29,11 +29,11 @@ public  class Marque extends Entity {
         this.id = id;
     }
 
-    public String getNomMarque() {
+    public String getnomMarque() {
         return nomMarque;
     }
 
-    public void setNomMarque(String nomMarque) {
+    public void setnomMarque(String nomMarque) {
         this.nomMarque = nomMarque;
     }
 
