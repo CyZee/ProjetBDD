@@ -1,4 +1,4 @@
 /.idea/
 /ProjetBDD.iml
 /TP3.iml
-/sql/PostgresConnection.java
+/TP3/src/sql/PostgresConnection.java
