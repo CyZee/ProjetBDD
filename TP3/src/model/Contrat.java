@@ -1,6 +1,6 @@
 package model;
 
-public class Contrat extends Entity {
+public  class Contrat extends Entity {
 
     private int id;
     private String dateDeRetrait;
@@ -44,9 +44,10 @@ public class Contrat extends Entity {
         this(id, dateDeRetrait, dateDeRetour, kmRetrait, kmRetour, client, vehicule, null);
     }
 
-    public Contrat(int id, String dateDeRetrait, String dateDeRetour, int kmRetrait, int kmRetour, Client client, Vehicule vehicule, String immatriculation) {
-        this(id, dateDeRetrait, dateDeRetour, kmRetrait, kmRetour, client, vehicule,immatriculation, null);
+    public Contrat(int id, String dateDeRetrait, String dateDeRetour, int kmRetrait, int kmRetour, Client client, Vehicule vehicule,Agence agence) {
+        this(id, dateDeRetrait, dateDeRetour, kmRetrait, kmRetour, client, vehicule,agence, null);
     }
+
 
     public Contrat(int id, String dateDeRetrait, String dateDeRetour, int kmRetrait, int kmRetour, Client client, Vehicule vehicule, Agence agence, String immatriculation) {
         super();
@@ -133,4 +134,54 @@ public class Contrat extends Entity {
     public void setImmatriculation(String immatriculation){this.immatriculation = immatriculation;}
 
     public String getImmatriculation(){return immatriculation;}
+
+    @Override
+    public void add(Agence agence1) {
+
+    }
+
+    @Override
+    public void add(Type type1) {
+
+    }
+
+    @Override
+    public void add(Ville ville1) {
+
+    }
+
+    @Override
+    public void add(Categorie categorie1) {
+
+    }
+
+    @Override
+    public void add(Vehicule vehicule1) {
+
+    }
+
+    @Override
+    public void add(Modele modele1) {
+
+    }
+
+    @Override
+    public void add(Marque marque1) {
+
+    }
+
+    @Override
+    public void add(Contrat contrat1) {
+
+    }
+
+    @Override
+    public void add(Client client1) {
+
+    }
+
+    @Override
+    public void add(Facture facture1) {
+
+    }
 }

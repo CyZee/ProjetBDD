@@ -1,6 +1,6 @@
 package model;
 
-public class Vehicule extends Entity {
+public  class Vehicule extends Entity {
 
     private int id;
     private String dateMiseEnCirculation;
@@ -146,5 +146,55 @@ public class Vehicule extends Entity {
 
     public void setAgence(Agence agence) {
         this.agence = agence;
+    }
+
+    @Override
+    public void add(Agence agence1) {
+
+    }
+
+    @Override
+    public void add(Type type1) {
+
+    }
+
+    @Override
+    public void add(Ville ville1) {
+
+    }
+
+    @Override
+    public void add(Categorie categorie1) {
+
+    }
+
+    @Override
+    public void add(Vehicule vehicule1) {
+
+    }
+
+    @Override
+    public void add(Modele modele1) {
+
+    }
+
+    @Override
+    public void add(Marque marque1) {
+
+    }
+
+    @Override
+    public void add(Contrat contrat1) {
+
+    }
+
+    @Override
+    public void add(Client client1) {
+
+    }
+
+    @Override
+    public void add(Facture facture1) {
+
     }
 }

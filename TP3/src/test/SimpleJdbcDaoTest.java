@@ -2,7 +2,7 @@ package test;//package test;
 
 import dao.Dao;
 import dao.jdbc.VilleDaoImpl;
-import dao.jdbc.AganceDaoImpl;
+import dao.jdbc.AgenceDaoImpl;
 import dao.jdbc.MarqueDaoImpl;
 import dao.jdbc.ClientDaoImpl;
 import dao.jdbc.VehiculeDaoImpl;
@@ -15,12 +15,12 @@ import dao.exception.DaoException;
 
 import model.Entity;
 import model.Ville;
-import model.Agance;
+import model.Agence;
 import model.Marque;
 import model.Client;
 import model.Vehicule;
 import model.Type;
-import model.Cetagorie;
+import model.Categorie;
 import model.Modele;
 import model.Contrat;
 import model.Facture;
@@ -59,14 +59,14 @@ public class SimpleJdbcDaoTest {
 
     }*/
 
-    public void testFindAllVille(){
-        Doa dao = new VilleDaoImpl(connection);
+    public void testFindAllVille() throws DaoException {
+        Dao dao = new VilleDaoImpl(connection);
 
         try{
             Collection<Entity> ville = dao.findAll();
             for (Entity entity : ville){
-                Ville ville = (Ville) entity;
-                System.out.println(ville.getId() + " | " + ville.getNom() + " | " + ville.getNombreHabitants());
+                Ville ville1 = (Ville) entity;
+                System.out.println(ville1.getId() + " | " + ville1.getNom() + " | " + ville1.getNombreHabitants());
             }
         }catch(DaoException e){
             e.printStackTrace();
@@ -83,13 +83,13 @@ public class SimpleJdbcDaoTest {
     }
 
     public void testFindAllAgance(){
-        Doa dao = new AgenceDaoImpl(connection);
+        Dao dao = new AgenceDaoImpl(connection);
 
         try{
             Collection<Entity> agence = dao.findAll();
             for (Entity entity : agence){
-                Agence agence = (Agence) entity;
-                System.out.println(agence.getId + " | " + agence.getNbEmployes() + " | " + agence.getVille());
+                Agence agence1 = (Agence) entity;
+                System.out.println(agence1.getId() + " | " + agence1.getNbEmployes() + " | " + agence1.getVille());
             }
         }catch(DaoException e){
             e.printStackTrace();
@@ -106,13 +106,13 @@ public class SimpleJdbcDaoTest {
     }
 
     public void testFindAllMarque(){
-        Doa dao = new MarqueDaoImpl(connection);
+        Dao dao = new MarqueDaoImpl(connection);
 
         try{
             Collection<Entity> marque = dao.findAll();
             for (Entity entity : marque){
-                Marque marque = (Marque) entity;
-                System.out.println(marque.getId() + " | " + marque.getNomMarque());
+                Marque marque1 = (Marque) entity;
+                System.out.println(marque1.getId() + " | " + marque1.getNomMarque());
             }
         }catch(DaoException e){
             e.printStackTrace();
@@ -129,13 +129,13 @@ public class SimpleJdbcDaoTest {
     }
 
     public void testFindAllClient(){
-        Doa dao = new ClientDaoImpl(connection);
+        Dao dao = new ClientDaoImpl(connection);
 
         try{
             Collection<Entity> client = dao.findAll();
             for (Entity entity : client){
-                Client client = (Client) entity;
-                System.out.println(client.getId() + " | " + client.getNom() + " | " + client.getAdresse() + " | " + client.getCodePostale() + " | " + client.getVille());
+                Client client1 = (Client) entity;
+                System.out.println(client1.getId() + " | " + client1.getNom() + " | " + client1.getAdresse() + " | " + client1.getCodePostal() + " | " + client1.getVille());
             }
         }catch(DaoException e){
             e.printStackTrace();
@@ -152,13 +152,13 @@ public class SimpleJdbcDaoTest {
     }
 
     public void testFindAllVehicule(){
-        Doa dao = new VehiculeDaoImpl(connection);
+        Dao dao = new VehiculeDaoImpl(connection);
 
         try{
             Collection<Entity> vehicule = dao.findAll();
             for (Entity entity : vehicule){
-                Vehicule vehicule = (Vehicule) entity;
-                System.out.println(vehicule.getId() + " | " + vehicule.getDateMiseEnCirculation() + " | " + vehicule.getEtat() + " | " + vehicule.getNbKilometres() + " | " + vehicule.getPrixParJourDeLocation() + " | " + vehicule.getMarque() + " | " + vehicule.getModele() + " | " + vehicule.getCategorie() + " | " + vehicule.getType() + " | " + vehicule.getAgence());
+                Vehicule vehicule1 = (Vehicule) entity;
+                System.out.println(vehicule1.getId() + " | " + vehicule1.getDateMiseEnCirculation() + " | " + vehicule1.getEtat() + " | " + vehicule1.getNbKilometres() + " | " + vehicule1.getPrixParJourDeLocation() + " | " + vehicule1.getMarque() + " | " + vehicule1.getModele() + " | " + vehicule1.getCategorie() + " | " + vehicule1.getType() + " | " + vehicule1.getAgence());
             }
         }catch(DaoException e){
             e.printStackTrace();
@@ -174,13 +174,13 @@ public class SimpleJdbcDaoTest {
     }
 
     public void testFindAllType(){
-        Doa dao = new TypeDaoImpl(connection);
+        Dao dao = new TypeDaoImpl(connection);
 
         try{
             Collection<Entity> type = dao.findAll();
             for (Entity entity : type){
-                Type type = (Type) entity;
-                System.out.println(type.getId() + " | " + type.getLibelle());
+                Type type1 = (Type) entity;
+                System.out.println(type1.getId() + " | " + type1.getLibelle());
             }
         }catch(DaoException e){
             e.printStackTrace();
@@ -197,13 +197,13 @@ public class SimpleJdbcDaoTest {
     }
 
     public void testFindAllCategorie(){
-        Doa dao = new CategoreDaoImpl(connection);
+        Dao dao = new CategorieDaoImpl(connection);
 
         try{
             Collection<Entity> categorie = dao.findAll();
             for (Entity entity : categorie){
-                Categorie categorie = (Categorie) entity;
-                System.out.println(categorie.getId() + " | " + categorie.getLibelle());
+                Categorie categorie1 = (Categorie) entity;
+                System.out.println(categorie1.getId() + " | " + categorie1.getLibelle());
             }
         }catch(DaoException e){
             e.printStackTrace();
@@ -220,13 +220,13 @@ public class SimpleJdbcDaoTest {
     }
 
     public void testFindAllModele(){
-        Doa dao = new ModeleDaoImpl(connection);
+        Dao dao = new ModeleDaoImpl(connection);
 
         try{
             Collection<Entity> modele = dao.findAll();
             for (Entity entity : modele){
-                Modele modele = (Modele) entity;
-                System.out.println(modele.getId() + " | " + modele.getDenomination() + " | " + modele.getPuissanceFiscale());
+                Modele modele1 = (Modele) entity;
+                System.out.println(modele1.getId() + " | " + modele1.getLibelle() + " | " + modele1.getPuissanceFiscale());
             }
         }catch(DaoException e){
             e.printStackTrace();
@@ -243,13 +243,13 @@ public class SimpleJdbcDaoTest {
     }
 
     public void testFindAllContrat(){
-        Doa dao = new ContratDaoImpl(connection);
+        Dao dao = new ContratDaoImpl(connection);
 
         try{
             Collection<Entity> contrat = dao.findAll();
             for (Entity entity : contrat){
-                Contrat contrat = (Contrat) entity;
-                System.out.println(contrat.getId() + " | " + contrat.getDateDeRetrait() + " | " + contrat.getDateDeRetour() + " | " + contrat.getKmRetrait() + " | " + contrat.getKmRetour() + " | " + contrat.getClient() + " | " + contrat.getImmatriculation() + " | " + contrat.getAgence());
+                Contrat contrat1 = (Contrat) entity;
+                System.out.println(contrat1.getId() + " | " + contrat1.getDateDeRetrait() + " | " + contrat1.getDateDeRetour() + " | " + contrat1.getKmRetrait() + " | " + contrat1.getKmRetour() + " | " + contrat1.getClient() + " | " + contrat1.getImmatriculation() + " | " + contrat1.getAgence());
             }
         }catch(DaoException e){
             e.printStackTrace();
@@ -266,13 +266,13 @@ public class SimpleJdbcDaoTest {
     }
 
     public void testFindAllFacture(){
-        Doa dao = new FactureDaoImpl(connection);
+        Dao dao = new FactureDaoImpl(connection);
 
         try{
             Collection<Entity> facture = dao.findAll();
             for (Entity entity : facture){
-                Facture facture = (Facture) entity;
-                System.out.println(facture.getId() + " | " + facture.getMontant() + " | " + facture.getContrat());
+                Facture facture1 = (Facture) entity;
+                System.out.println(facture1.getId() + " | " + facture1.getMontant() + " | " + facture1.getContrat());
             }
         }catch(DaoException e){
             e.printStackTrace();
@@ -294,24 +294,24 @@ public class SimpleJdbcDaoTest {
 
 
 
-    public void test() {
+    public void test() throws DaoException {
         connection = PostgresConnection.getInstance();
 
         dao = new VilleDaoImpl(connection);
 
         System.out.println("***** Création d'une ville : ");
-        Ville ville = new Ville("bruhLand");
+        Ville ville = new Ville(1);
         testCreateVille(ville);
 
         System.out.println("***** Liste des villes : ");
         testFindAllVille();
 
 
-        dao = new AganceDaoImpl(connection);
+        dao = new AgenceDaoImpl(connection);
 
-        System.out.println("***** Création d'une agance : ");
-        Agance agance = new Agance("bruhAndCo");
-        testCreateAgance(agance);
+        System.out.println("***** Création d'une agence : ");
+        Agence agance = new Agence(1);
+        testCreateAgence(agance);
 
         System.out.println("***** Liste des agances : ");
         testFindAllAgance();
@@ -320,7 +320,7 @@ public class SimpleJdbcDaoTest {
         dao = new MarqueDaoImpl(connection);
 
         System.out.println("***** Création d'une marque : ");
-        Marque marque = new Marque("bruh");
+        Marque marque = new Marque(1);
         testCreateMarque(marque);
 
         System.out.println("***** Liste des marque : ");
@@ -330,7 +330,7 @@ public class SimpleJdbcDaoTest {
         dao = new ClientDaoImpl(connection);
 
         System.out.println("***** Création d'un client : ");
-        Client client = new Client("Jean_bruh");
+        Client client = new Client(1);
         testCreateClient(client);
 
         System.out.println("***** Liste des clients : ");
@@ -340,7 +340,7 @@ public class SimpleJdbcDaoTest {
         dao = new VehiculeDaoImpl(connection);
 
         System.out.println("***** Création d'un vehicule : ");
-        Vehicule vehicule = new Vehicule("bruhMobile");
+        Vehicule vehicule = new Vehicule(1);
         testCreateVehicule(vehicule);
 
         System.out.println("***** Liste des vehicules : ");
@@ -350,7 +350,7 @@ public class SimpleJdbcDaoTest {
         dao = new TypeDaoImpl(connection);
 
         System.out.println("***** Création d'un type : ");
-        Type type = new Type("bruuuuuh");
+        Type type = new Type(1);
         testCreateType(type);
 
         System.out.println("***** Liste des types : ");
@@ -360,7 +360,7 @@ public class SimpleJdbcDaoTest {
         dao = new CategorieDaoImpl(connection);
 
         System.out.println("***** Création d'une categorie : ");
-        Categorie categorie = new Categorie("bruhed");
+        Categorie categorie = new Categorie(1);
         testCreateCategorie(categorie);
 
         System.out.println("***** Liste des categories : ");
@@ -370,7 +370,7 @@ public class SimpleJdbcDaoTest {
         dao = new ModeleDaoImpl(connection);
 
         System.out.println("***** Création d'un modele : ");
-        Modele modele = new modele("bruh2000");
+        Modele modele = new Modele(1);
         testCreateModele(modele);
 
         System.out.println("***** Liste des Modeles : ");
@@ -380,7 +380,7 @@ public class SimpleJdbcDaoTest {
         dao = new ContratDaoImpl(connection);
 
         System.out.println("***** Création d'un contrat : ");
-        Contrat contrat = new Contrat("bruh.txt");
+        Contrat contrat = new Contrat(1);
         testCreateContrat(contrat);
 
         System.out.println("***** Liste des contrats : ");
@@ -390,7 +390,7 @@ public class SimpleJdbcDaoTest {
         dao = new FactureDaoImpl(connection);
 
         System.out.println("***** Création d'une facture : ");
-        Facture facture = new Facture("bruhBill");
+        Facture facture = new Facture(1);
         testCreateFacture(facture);
 
         System.out.println("***** Liste des factures : ");
@@ -398,7 +398,7 @@ public class SimpleJdbcDaoTest {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DaoException {
         new SimpleJdbcDaoTest().test();
     }
 }
