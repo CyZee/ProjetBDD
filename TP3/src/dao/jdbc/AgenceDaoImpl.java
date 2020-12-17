@@ -43,7 +43,7 @@ public class AgenceDaoImpl extends JdbcDao {
 
                         Agence agence1 = new Agence();
                         agence1.setId(resultSet.getInt("id"));
-                        agence1.setNbEmployes(resultSet.getInt("nbEmployes"));
+                        agence1.setNbEmployes(resultSet.getInt("nbemployes"));
                         agence1.setVille((Ville)ville.findById(resultSet.getInt("ville")));
                         agence1.add(agence1);
                     }
@@ -86,7 +86,7 @@ public class AgenceDaoImpl extends JdbcDao {
 
         PreparedStatement stmt= null;
 
-        String sqlReq = "insert into mgence(nbEmployes,ville) values (?,?)";
+        String sqlReq = "insert into agence(nbEmployes,ville) values (?,?)";
 
         try {
 

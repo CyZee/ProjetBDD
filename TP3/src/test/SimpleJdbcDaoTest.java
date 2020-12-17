@@ -294,6 +294,8 @@ public class SimpleJdbcDaoTest {
 
 
 
+
+
     public void test() throws DaoException{
         connection = PostgresConnection.getInstance();
 

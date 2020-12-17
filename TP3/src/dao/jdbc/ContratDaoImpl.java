@@ -85,6 +85,8 @@ public class ContratDaoImpl extends JdbcDao {
                 contrat.setVehicule((Vehicule)vehicule.findById(resultSet.getInt("vehicule")));
                 contrat.setAgence((Agence) agence.findById(resultSet.getInt("agence")));
 
+
+
             }
         } catch (SQLException e) {
             System.err.println("Erreur SQL : " + e.getLocalizedMessage());
@@ -100,7 +102,7 @@ public class ContratDaoImpl extends JdbcDao {
 
         PreparedStatement stmt= null;
 
-        String sqlReq = "insert into contrat(dateDeRetrait,dateDeRetour,kmRetrait,kmRetour,client,vehicule,agence,) values (?,?,?,?,?,?,?)";
+        String sqlReq = "insert into contart(dateDeRetrait,dateDeRetour,kmRetrait,kmRetour,client,vehicule,agence) values (?,?,?,?,?,?,?)";
 
         try {
 
@@ -114,6 +116,7 @@ public class ContratDaoImpl extends JdbcDao {
             stmt.setInt(5, ((Contrat)entity).getClient().getId());
             stmt.setInt(6, ((Contrat)entity).getVehicule().getId());
             stmt.setInt(7, ((Contrat)entity).getAgence().getId());
+
 
 
 
@@ -131,7 +134,7 @@ public class ContratDaoImpl extends JdbcDao {
     @Override
     public void update(Entity entity) throws DaoException {
         PreparedStatement stmt= null;
-        String sqlReq = "update contrat set dateDeRetrait = ?, dateDeRetour = ?, kmRetrait = ?, kmRetour = ?, client = ?, vehicule = ?, agence = ? where id = ?";
+        String sqlReq = "update contrat set dateDeRetrait = ?, dateDeRetour = ?, kmRetrait = ?, kmRetour = ?, client = ?, vehicule = ?, agence = ?  where id = ?";
         try {
             stmt = connection.prepareStatement(sqlReq);
             stmt.setString(1, ((Contrat)entity).getDateDeRetrait());
@@ -143,7 +146,8 @@ public class ContratDaoImpl extends JdbcDao {
             stmt.setInt(7, ((Contrat)entity).getAgence().getId());
 
 
-            stmt.setInt(9,((Contrat) entity).getId());
+
+            stmt.setInt(8,((Contrat) entity).getId());
             stmt.executeUpdate();
         } catch (SQLException e) {
             System.err.println("Erreur SQL : " + e.getLocalizedMessage());
@@ -163,5 +167,28 @@ public class ContratDaoImpl extends JdbcDao {
         } catch (SQLException e) {
             System.err.println("Erreur SQL : " + e.getLocalizedMessage());
         }
+    }
+
+    public Contrat question3(int id) throws DaoException{
+        Contrat contrat = new Contrat();
+
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT contrat.dateRetour FROM contrat WHERE id="+id);
+
+            while (resultSet.next()) {
+                VehiculeDaoImpl vehicule = new VehiculeDaoImpl(connection);
+
+                contrat.setDateDeRetour(resultSet.getString("dateRetour"));
+                contrat.setVehicule((Vehicule)vehicule.findById(resultSet.getInt("vehicule")));
+
+
+
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur SQL : " + e.getLocalizedMessage());
+        }
+
+        return contrat;
     }
 }
