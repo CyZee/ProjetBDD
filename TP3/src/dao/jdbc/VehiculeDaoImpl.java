@@ -178,5 +178,28 @@ public class VehiculeDaoImpl extends JdbcDao {
         }
     }
 
+    public Vehicule question10() throws DaoException{
+        Vehicule vehicule = new Vehicule();
+
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT count(vehicule.id), vehicule.agance FROM vehicule WHERE vehicule.agence<cout(vehicule.agance)");
+
+            while (resultSet.next()) {
+                AgenceDaoImpl agence = new AgenceDaoImpl(connection);
+
+                vehicule.setId(resultSet.getInt("id"));
+                vehicule.setAgence((Agence)agence.findById(resultSet.getInt("agence")));
+
+
+
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur SQL : " + e.getLocalizedMessage());
+        }
+
+        return vehicule;
+    }
+
 
 }
