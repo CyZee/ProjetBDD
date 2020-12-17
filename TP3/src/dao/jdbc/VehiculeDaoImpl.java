@@ -44,18 +44,18 @@ public class VehiculeDaoImpl extends JdbcDao {
                 vehicule.setEtat(resultSet.getString("etat"));
                 vehicule.setNbKilometres(resultSet.getInt("nbKilometres"));
                 vehicule.setPrixParJourDeLocation(resultSet.getInt("prixParJourDeLocation"));
-                vehicule.setMarque(resultSet.getMarque("marque"));
-                vehicule.setModele(resultSet.getModele("modele"));
-                vehicule.setCategorie(resultSet.getCategorie("categorie"));
-                vehicule.setType(resultSet.getType("type"));
-                vehicule.setAgence(resultSet.getAgence("agence"));
+                vehicule.setMarque((Marque)marqueDaoImpl.findById(resultSet.getInt("marque")));
+                vehicule.setModele((Modele)modeleDaoImpl.findById(resultSet.getInt("modele")));
+                vehicule.setCategorie((Categorie)categorieDaoImpl.findById(resultSet.getInt("categorie")));
+                vehicule.setType((Type)typeDaoImpl.findById(resultSet.getInt("type")));
+                vehicule.setAgence((Agence)agenceDaoImpl.findById(resultSet.getInt("agence"));
                 vehicule.add(vehicule);
             }
         } catch (SQLException e) {
             throw new DaoException(e);
         }
 
-        return marque;
+        return vehicule;
     }
 
     @Override
