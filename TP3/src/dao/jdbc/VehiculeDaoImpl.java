@@ -183,7 +183,7 @@ public class VehiculeDaoImpl extends JdbcDao {
 
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT count(vehicule.id), vehicule.agance FROM vehicule WHERE vehicule.agence<cout(vehicule.agance)");
+            ResultSet resultSet = statement.executeQuery("SELECT count(vehicule.id), vehicule.agence FROM vehicule WHERE vehicule.agence<count(vehicule.agence)");
 
             while (resultSet.next()) {
                 AgenceDaoImpl agence = new AgenceDaoImpl(connection);

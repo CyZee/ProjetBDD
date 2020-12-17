@@ -399,8 +399,40 @@ public class SimpleJdbcDaoTest {
         testFindAllFacture();
 
 
+        System.out.println();
+        System.out.println("#-------------------------------------------------------------------#");
+        System.out.println();
+
+        //----------------------------------------
+
+        ContratDaoImpl daoContrat = new ContratDaoImpl(connection);
+        Contrat resultQ3;
+
+        try{
+            resultQ3 = daoContrat.question3(2);
+            System.out.println("Requete 3 :");
+            System.out.println(resultQ3.getDateDeRetour() + " | " +  resultQ3.getVehicule());
+            System.out.println("");
+        }catch(DaoException e) {
+            e.printStackTrace();
+        }
+
+        //----------------------------------------
 
 
+        VehiculeDaoImpl daoVehicule = new VehiculeDaoImpl(connection);
+        Vehicule resultQ10;
+
+        try{
+            resultQ10 = daoVehicule.question10();
+            System.out.println("Requete 10 :");
+            System.out.println(resultQ10.getAgence());
+            System.out.println("");
+        }catch(DaoException e) {
+            e.printStackTrace();
+        }
+
+        //----------------------------------------
 
     }
 

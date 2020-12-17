@@ -174,13 +174,13 @@ public class ContratDaoImpl extends JdbcDao {
 
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT contrat.\"dateDeRetour\" FROM contrat WHERE id="+id);
+            ResultSet resultSet = statement.executeQuery("SELECT contrat.\"dateDeRetour\", contrat.immatriculation FROM contrat WHERE id="+id);
 
             while (resultSet.next()) {
                 VehiculeDaoImpl vehicule = new VehiculeDaoImpl(connection);
 
-                contrat.setDateDeRetour(resultSet.getString("dateRetour"));
-                contrat.setVehicule((Vehicule)vehicule.findById(resultSet.getInt("vehicule")));
+                contrat.setDateDeRetour(resultSet.getString("dateDeRetour"));
+                contrat.setVehicule((Vehicule)vehicule.findById(resultSet.getInt("immatriculation")));
 
 
 
