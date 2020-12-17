@@ -99,7 +99,7 @@ public class ClientDaoImpl extends JdbcDao {
             stmt.setString(2, ((Client)entity).getAdresse());
             stmt.setString(3, ((Client)entity).getCodePostal());
 
-            stmt.setInt(4, ((Agence)entity).getVille().getId());
+            stmt.setInt(4, ((Client)entity).getVille().getId());
 
 
             int res = stmt.executeUpdate();

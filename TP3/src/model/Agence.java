@@ -1,6 +1,6 @@
 package model;
 
-public  class Agence extends Entity {
+public class Agence extends Entity {
 
     private int id;
     private int nbEmployes;

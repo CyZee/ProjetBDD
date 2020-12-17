@@ -12,6 +12,7 @@ import dao.jdbc.ModeleDaoImpl;
 import dao.jdbc.ContratDaoImpl;
 import dao.jdbc.FactureDaoImpl;
 import dao.exception.DaoException;
+import sql.PostgresConnection;
 
 import model.Entity;
 import model.Ville;
@@ -248,7 +249,7 @@ public class SimpleJdbcDaoTest {
             Collection<Entity> contrat = dao.findAll();
             for (Entity entity : contrat){
                 Contrat contrat1 = (Contrat) entity;
-                System.out.println(contrat1.getId() + " | " + contrat1.getDateDeRetrait() + " | " + contrat1.getDateDeRetour() + " | " + contrat1.getKmRetrait() + " | " + contrat1.getKmRetour() + " | " + contrat1.getClient() + " | " + contrat1.getImmatriculation() + " | " + contrat1.getAgence());
+                System.out.println(contrat1.getId() + " | " + contrat1.getDateDeRetrait() + " | " + contrat1.getDateDeRetour() + " | " + contrat1.getKmRetrait() + " | " + contrat1.getKmRetour() + " | " + contrat1.getClient()  + " | " + contrat1.getAgence());
             }
         }catch(DaoException e){
             e.printStackTrace();
@@ -293,13 +294,13 @@ public class SimpleJdbcDaoTest {
 
 
 
-    public void test() throws DaoException {
+    public void test() throws DaoException{
         connection = PostgresConnection.getInstance();
 
         dao = new VilleDaoImpl(connection);
 
         System.out.println("***** Création d'une ville : ");
-        Ville ville = new Ville(1);
+        Ville ville = new Ville(1, "Belfort",55742);
         testCreateVille(ville);
 
         System.out.println("***** Liste des villes : ");
@@ -309,7 +310,7 @@ public class SimpleJdbcDaoTest {
         dao = new AgenceDaoImpl(connection);
 
         System.out.println("***** Création d'une agence : ");
-        Agence agance = new Agence(1);
+        Agence agance = new Agence(1, 12, ville);
         testCreateAgence(agance);
 
         System.out.println("***** Liste des agances : ");
@@ -319,7 +320,7 @@ public class SimpleJdbcDaoTest {
         dao = new MarqueDaoImpl(connection);
 
         System.out.println("***** Création d'une marque : ");
-        Marque marque = new Marque(1);
+        Marque marque = new Marque(1, "Pegasus");
         testCreateMarque(marque);
 
         System.out.println("***** Liste des marque : ");
@@ -329,27 +330,16 @@ public class SimpleJdbcDaoTest {
         dao = new ClientDaoImpl(connection);
 
         System.out.println("***** Création d'un client : ");
-        Client client = new Client(1);
+        Client client = new Client(1, "Wawa", "2 rue Ernest Duvillard", "90000", ville);
         testCreateClient(client);
 
         System.out.println("***** Liste des clients : ");
         testFindAllClient();
 
-
-        dao = new VehiculeDaoImpl(connection);
-
-        System.out.println("***** Création d'un vehicule : ");
-        Vehicule vehicule = new Vehicule(1);
-        testCreateVehicule(vehicule);
-
-        System.out.println("***** Liste des vehicules : ");
-        testFindAllVehicule();
-
-
         dao = new TypeDaoImpl(connection);
 
         System.out.println("***** Création d'un type : ");
-        Type type = new Type(1);
+        Type type = new Type(1, "auto berlines");
         testCreateType(type);
 
         System.out.println("***** Liste des types : ");
@@ -359,7 +349,7 @@ public class SimpleJdbcDaoTest {
         dao = new CategorieDaoImpl(connection);
 
         System.out.println("***** Création d'une categorie : ");
-        Categorie categorie = new Categorie(1);
+        Categorie categorie = new Categorie(1, "SUV");
         testCreateCategorie(categorie);
 
         System.out.println("***** Liste des categories : ");
@@ -369,17 +359,26 @@ public class SimpleJdbcDaoTest {
         dao = new ModeleDaoImpl(connection);
 
         System.out.println("***** Création d'un modele : ");
-        Modele modele = new Modele(1);
+        Modele modele = new Modele(1, "S520", 500);
         testCreateModele(modele);
 
         System.out.println("***** Liste des Modeles : ");
         testFindAllModele();
 
+        dao = new VehiculeDaoImpl(connection);
+
+        System.out.println("***** Création d'un vehicule : ");
+        Vehicule vehicule = new Vehicule(1, "25/03/2018", "Usée", 15781, 5, marque, modele, categorie, type, agance);
+        testCreateVehicule(vehicule);
+
+        System.out.println("***** Liste des vehicules : ");
+        testFindAllVehicule();
+
 
         dao = new ContratDaoImpl(connection);
 
         System.out.println("***** Création d'un contrat : ");
-        Contrat contrat = new Contrat(1);
+        Contrat contrat = new Contrat(1, "18/04/2019", "27/07/2020", 5462, 10423, client, vehicule, agance);
         testCreateContrat(contrat);
 
         System.out.println("***** Liste des contrats : ");
@@ -389,7 +388,7 @@ public class SimpleJdbcDaoTest {
         dao = new FactureDaoImpl(connection);
 
         System.out.println("***** Création d'une facture : ");
-        Facture facture = new Facture(1);
+        Facture facture = new Facture(1, 650, contrat);
         testCreateFacture(facture);
 
         System.out.println("***** Liste des factures : ");
