@@ -4,8 +4,15 @@ import dao.Dao;
 import dao.exception.DaoException;
 import model.Entity;
 import model.Ville;
-import model.Agence;
+import model.Agance;
 import model.Marque;
+import model.Client;
+import model.Vehicule;
+import model.Type;
+import model.Cetagorie;
+import model.Modele;
+import model.Contrat;
+import model.Facture;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -17,7 +24,7 @@ public class Agence extends JdbcDao {
 
     public AgenceDaoImpl(Connection connection) {
         super(connection);
-        AgenceDao = new AgenceDaoImpl(connection);
+
 
     }
 
@@ -31,17 +38,17 @@ public class Agence extends JdbcDao {
                     ResultSet resultSet = statement.executeQuery("SELECT * FROM agence");
 
                     while (resultSet.next()) {
-                        Agence agence = new >Agence();
-                        agence.setId(resultSet.getInt("idAgence"));
+                        Agence agence = new Agence();
+                        agence.setId(resultSet.getInt("idid"));
                         agence.setNbEmployes(resultSet.getString("nbEmployes")):
-                        agence.setVille((Ville)villeDaompl.findById(resultSet.getInt("idVille")));
+                        agence.setVille((Ville)villeDaompl.findById(resultSet.getInt("ville")));
                         agence.add(agence);
                     }
                 } catch (SQLException e) {
                     throw new DaoException(e);
                 }
 
-                return etudiant;
+                return agence;
     }
 
     @Override
@@ -50,15 +57,15 @@ public class Agence extends JdbcDao {
 
                 try {
                     Statement statement = connexion.createStatement();
-                    ResultSet resultSet = statement.executeQuery("SELECT * FROM agence WHERE idAgence="+id);
+                    ResultSet resultSet = statement.executeQuery("SELECT * FROM agence WHERE id="+id);
 
                     while (resultSet.next()) {
                         VilleRepository villeRepository = new VilleRepository();
 
-                        agence.setId(resultSet.getInt("idAgence"));
+                        agence.setId(resultSet.getInt("id"));
                         agence.setNbEmployes(resultSet.getInt("nbEmployes"));
 
-                        agence.setVille((Ville)villeRepository.findById(resultSet.getInt("idVille")));
+                        agence.setVille((Ville)villeRepository.findById(resultSet.getInt("ville")));
 
                     }
                 } catch (SQLException e) {
@@ -75,7 +82,7 @@ public class Agence extends JdbcDao {
 
         PreparedStatement stmt= null;
 
-        String sqlReq = "insert into Agence(nbEmployes,idVille) values (?,?)";
+        String sqlReq = "insert into mgence(nbEmployes,ville) values (?,?)";
 
         try {
 
@@ -101,7 +108,7 @@ public class Agence extends JdbcDao {
     @Override
     public void update(Entity entity) throws DaoException {
         PreparedStatement stmt= null;
-        String sqlReq = "update agence set nbEmployes = ?,idVille = ? where idAgence = ?";
+        String sqlReq = "update agence set nbEmployes = ?,ville = ? where id = ?";
         try {
                     stmt = connexion.prepareStatement(sqlReq);
                     stmt.setString(1,((Agence)entity).getNbEmployes());
@@ -119,7 +126,7 @@ public class Agence extends JdbcDao {
     @Override
     public void delete(Entity entity) throws DaoException {
         PreparedStatement stmt= null;
-        String sqlReq = "delete from agence where idAgence = ?";
+        String sqlReq = "delete from agence where id = ?";
 
         try {
                     stmt = connexion.prepareStatement(sqlReq);

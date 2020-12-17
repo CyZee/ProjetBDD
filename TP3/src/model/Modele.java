@@ -4,7 +4,7 @@ public class Modele extends Entity {
 
     private int id;
     private String libelle;
-    private int puissancePascale;
+    private int puissanceFiscale;
 
     public Modele() {
         this(0);
@@ -24,7 +24,7 @@ public class Modele extends Entity {
 
         this.id = id;
         this.libelle = libelle;
-        this.puissancePascale = puissnaceFiscale;
+        this.puissanceFiscale = puissnaceFiscale;
     }
 
     public int getId() {
@@ -43,11 +43,11 @@ public class Modele extends Entity {
         this.libelle = libelle;
     }
 
-    public int getPuissancePascale() {
-        return puissancePascale;
+    public int getPuissanceFiscale() {
+        return puissanceFiscale;
     }
 
-    public void setPuissancePascale(int puissancePascale) {
-        this.puissancePascale = puissancePascale;
+    public void setPuissancePascale(int puissanceFiscale) {
+        this.puissanceFiscale = puissanceFiscale;
     }
 }

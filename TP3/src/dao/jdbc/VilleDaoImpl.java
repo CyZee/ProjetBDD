@@ -3,6 +3,15 @@ package dao.jdbc;//package dao.jdbc;
 import dao.exception.DaoException;
 import model.Entity;
 import model.Ville;
+import model.Agance;
+import model.Marque;
+import model.Client;
+import model.Vehicule;
+import model.Type;
+import model.Cetagorie;
+import model.Modele;
+import model.Contrat;
+import model.Facture;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,7 +23,9 @@ public class VilleDaoImpl extends JdbcDao {
         super(connection);
     }
 
-    @Override public Collection<Entity> findAll() throws DaoException {
+
+    @Override
+    public Collection<Entity> findAll() throws DaoException {
         Collection<Entity> ville = new ArrayList<>();
 
         try {
@@ -23,8 +34,8 @@ public class VilleDaoImpl extends JdbcDao {
 
             while (resultSet.next()) {
                 Ville ville = new Ville();
-                ville.setId(resultSet.getInt("idVille"));
-                ville.setNom(resultSet.getString("nomVille"));
+                ville.setId(resultSet.getInt("id"));
+                ville.setNom(resultSet.getString("nom"));
                 ville.setId(resultSet.getInt("nombreHabitants"));
                 ville.add(ville);
             }
@@ -42,11 +53,11 @@ public class VilleDaoImpl extends JdbcDao {
 
                try {
                    Statement statement = connexion.createStatement();
-                   ResultSet resultSet = statement.executeQuery("SELECT * FROM ville WHERE idVille="+id);
+                   ResultSet resultSet = statement.executeQuery("SELECT * FROM ville WHERE id="+id);
 
                    while (resultSet.next()) {
-                       ville.setId(resultSet.getInt("idVille"));
-                       ville.setNom(resultSet.getString("nomVille"));
+                       ville.setId(resultSet.getInt("id"));
+                       ville.setNom(resultSet.getString("nom"));
                        ville.setId(resultSet.getInt("nombreHabitants"));
                    }
                } catch (SQLException e) {
@@ -64,7 +75,7 @@ public class VilleDaoImpl extends JdbcDao {
 
         PreparedStatement stmt= null;
 
-        String sqlReq = "insert into ville(nomVille,nombreHabitants) values (?,?)";
+        String sqlReq = "insert into ville(nom,nombreHabitants) values (?,?)";
 
         try {
 
@@ -73,7 +84,7 @@ public class VilleDaoImpl extends JdbcDao {
             // stmt.setInt(1, 5);
 
             stmt.setString(1, ville.getNom());
-            stmt.setString(1, ville.getNombreHabitants());
+            stmt.setString(2, ville.getNombreHabitants());
 
             int res = stmt.executeUpdate();
             if (res > 0) {
@@ -90,7 +101,7 @@ public class VilleDaoImpl extends JdbcDao {
     @Override
     public void update(Entity entity) throws DaoException {
         PreparedStatement stmt= null;
-        String sqlReq = "update ville set nomVille = ?, nombreHabitants = ? where idVille = ?";
+        String sqlReq = "update ville set nom = ?, nombreHabitants = ? where id = ?";
         try {
                     stmt = connexion.prepareStatement(sqlReq);
                     stmt.setString(1,((Ville)entity).getNom());
@@ -105,7 +116,7 @@ public class VilleDaoImpl extends JdbcDao {
     @Override
     public void delete(Entity entity) throws DaoException {
         PreparedStatement stmt= null;
-        String sqlReq = "delete from ville where idVille = ?";
+        String sqlReq = "delete from ville where id = ?";
 
         try {
                     stmt = connexion.prepareStatement(sqlReq);

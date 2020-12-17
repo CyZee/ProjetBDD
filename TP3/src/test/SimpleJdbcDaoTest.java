@@ -66,7 +66,7 @@ public class SimpleJdbcDaoTest {
             Collection<Entity> ville = dao.findAll();
             for (Entity entity : ville){
                 Ville ville = (Ville) entity;
-                System.out.println(ville.getId() + " | " + ville.getNom() + " | " + ville.getInstance());
+                System.out.println(ville.getId() + " | " + ville.getNom() + " | " + ville.getNombreHabitants());
             }
         }catch(DaoException e){
             e.printStackTrace();
@@ -89,7 +89,7 @@ public class SimpleJdbcDaoTest {
             Collection<Entity> agence = dao.findAll();
             for (Entity entity : agence){
                 Agence agence = (Agence) entity;
-                System.out.println(agence.getId + " | " + agence.getNbEmploye() + " | " + agence.getVille());
+                System.out.println(agence.getId + " | " + agence.getNbEmployes() + " | " + agence.getVille());
             }
         }catch(DaoException e){
             e.printStackTrace();
@@ -135,7 +135,7 @@ public class SimpleJdbcDaoTest {
             Collection<Entity> client = dao.findAll();
             for (Entity entity : client){
                 Client client = (Client) entity;
-                System.out.println(client.getId() + " | " + client.getNomClient() + " | " + client.getAdresseClient() + " | " + client.getCodePostaleClient() + " | " + client.getVilleId());
+                System.out.println(client.getId() + " | " + client.getNom() + " | " + client.getAdresse() + " | " + client.getCodePostale() + " | " + client.getVille());
             }
         }catch(DaoException e){
             e.printStackTrace();
@@ -158,7 +158,7 @@ public class SimpleJdbcDaoTest {
             Collection<Entity> vehicule = dao.findAll();
             for (Entity entity : vehicule){
                 Vehicule vehicule = (Vehicule) entity;
-                System.out.println(vehicule.getId() + " | " + vehicule.getDateMiseEnCirculation() + " | " + vehicule.getEtat() + " | " + vehicule.getNbKilometres() + " | " + vehicule.getPrixParJourDeLocation() + " | " + vehicule.getMarqueId() + " | " + vehicule.getModeleId() + " | " + vehicule.getCategorieId() + " | " + vehicule.getTypeId() + " | " + vehicule.getAgenceId());
+                System.out.println(vehicule.getId() + " | " + vehicule.getDateMiseEnCirculation() + " | " + vehicule.getEtat() + " | " + vehicule.getNbKilometres() + " | " + vehicule.getPrixParJourDeLocation() + " | " + vehicule.getMarque() + " | " + vehicule.getModele() + " | " + vehicule.getCategorie() + " | " + vehicule.getType() + " | " + vehicule.getAgence());
             }
         }catch(DaoException e){
             e.printStackTrace();
@@ -180,7 +180,7 @@ public class SimpleJdbcDaoTest {
             Collection<Entity> type = dao.findAll();
             for (Entity entity : type){
                 Type type = (Type) entity;
-                System.out.println(type.getId() + " | " + type.getLibelleType());
+                System.out.println(type.getId() + " | " + type.getLibelle());
             }
         }catch(DaoException e){
             e.printStackTrace();
@@ -203,7 +203,7 @@ public class SimpleJdbcDaoTest {
             Collection<Entity> categorie = dao.findAll();
             for (Entity entity : categorie){
                 Categorie categorie = (Categorie) entity;
-                System.out.println(categorie.getId() + " | " + categorie.getLibelleCategorie());
+                System.out.println(categorie.getId() + " | " + categorie.getLibelle());
             }
         }catch(DaoException e){
             e.printStackTrace();
@@ -249,7 +249,7 @@ public class SimpleJdbcDaoTest {
             Collection<Entity> contrat = dao.findAll();
             for (Entity entity : contrat){
                 Contrat contrat = (Contrat) entity;
-                System.out.println(contrat.getId() + " | " + contrat.getDateDeRetrait() + " | " + contrat.getDateDeRetour() + " | " + contrat.getKmRetrait() + " | " + contrat.getKmRetour() + " | " + contrat.getClientId() + " | " + contrat.getImmatriculation() + " | " + contrat.getAgenceDeRetourId());
+                System.out.println(contrat.getId() + " | " + contrat.getDateDeRetrait() + " | " + contrat.getDateDeRetour() + " | " + contrat.getKmRetrait() + " | " + contrat.getKmRetour() + " | " + contrat.getClient() + " | " + contrat.getImmatriculation() + " | " + contrat.getAgence());
             }
         }catch(DaoException e){
             e.printStackTrace();
@@ -272,7 +272,7 @@ public class SimpleJdbcDaoTest {
             Collection<Entity> facture = dao.findAll();
             for (Entity entity : facture){
                 Facture facture = (Facture) entity;
-                System.out.println(facture.getId() + " | " + facture.getMontant() + " | " + facture.getContratId());
+                System.out.println(facture.getId() + " | " + facture.getMontant() + " | " + facture.getContrat());
             }
         }catch(DaoException e){
             e.printStackTrace();

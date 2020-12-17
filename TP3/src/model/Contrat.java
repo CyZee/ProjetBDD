@@ -10,6 +10,7 @@ public class Contrat extends Entity {
     private Client client;
     private Vehicule vehicule;
     private Agence agence;
+    private String immatriculation;
 
     public Contrat() {
         this(0);
@@ -43,7 +44,11 @@ public class Contrat extends Entity {
         this(id, dateDeRetrait, dateDeRetour, kmRetrait, kmRetour, client, vehicule, null);
     }
 
-    public Contrat(int id, String dateDeRetrait, String dateDeRetour, int kmRetrait, int kmRetour, Client client, Vehicule vehicule, Agence agence) {
+    public Contrat(int id, String dateDeRetrait, String dateDeRetour, int kmRetrait, int kmRetour, Client client, Vehicule vehicule, String immatriculation) {
+        this(id, dateDeRetrait, dateDeRetour, kmRetrait, kmRetour, client, vehicule,immatriculation, null);
+    }
+
+    public Contrat(int id, String dateDeRetrait, String dateDeRetour, int kmRetrait, int kmRetour, Client client, Vehicule vehicule, Agence agence, String immatriculation) {
         super();
 
         this.id = id;
@@ -54,6 +59,7 @@ public class Contrat extends Entity {
         this.client = client;
         this.vehicule = vehicule;
         this.agence = agence;
+        this.immatriculation = immatriculation;
     }
 
     public int getId() {
@@ -115,4 +121,8 @@ public class Contrat extends Entity {
     public void setClient(Client client) {
         this.client = client;
     }
+
+    public void setImmatriculation(String immatriculation){this.immatriculation = immatriculation;}
+
+    public String getImmatriculation(){return immatriculation;}
 }
