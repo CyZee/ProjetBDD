@@ -24,10 +24,8 @@ import model.Categorie;
 import model.Modele;
 import model.Contrat;
 import model.Facture;
-import sql.PostgresConnection;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.Collection;
 
 public class SimpleJdbcDaoTest {
