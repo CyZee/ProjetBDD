@@ -44,7 +44,7 @@ public class FactureDaoImpl extends JdbcDao {
                 facture1.setId(resultSet.getInt("id"));
                 facture1.setMontant(resultSet.getInt("montant"));
                 facture1.setContrat((Contrat)contrat.findById(resultSet.getInt("contrat")));
-                facture1.add(facture1);
+                facture.add(facture1);
             }
         } catch (SQLException e) {
             throw new DaoException(e);

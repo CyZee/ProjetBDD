@@ -37,7 +37,7 @@ public class VilleDaoImpl extends JdbcDao {
                 ville1.setId(resultSet.getInt("id"));
                 ville1.setNom(resultSet.getString("nom"));
                 ville1.setId(resultSet.getInt("nombreHabitants"));
-                ville1.add(ville1);
+                ville.add(ville1);
             }
         } catch (SQLException e) {
             throw new DaoException(e);

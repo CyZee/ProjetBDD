@@ -41,7 +41,7 @@ public class CategorieDaoImpl extends JdbcDao {
                 Categorie categorie1 = new Categorie();
                 categorie1.setId(resultSet.getInt("id"));
                 categorie1.setLibelle(resultSet.getString("libelle"));
-                categorie1.add(categorie1);
+                categorie.add(categorie1);
             }
         } catch (SQLException e) {
             throw new DaoException(e);

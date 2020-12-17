@@ -41,7 +41,7 @@ public class MarqueDaoImpl extends JdbcDao {
                         Marque marque1 = new Marque();
                         marque1.setId(resultSet.getInt("id"));
                         marque1.setnomMarque(resultSet.getString("nomMarque"));
-                        marque1.add(marque1);
+                        marque.add(marque1);
                     }
                 } catch (SQLException e) {
                     throw new DaoException(e);

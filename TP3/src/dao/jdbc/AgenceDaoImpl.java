@@ -45,7 +45,7 @@ public class AgenceDaoImpl extends JdbcDao {
                         agence1.setId(resultSet.getInt("id"));
                         agence1.setNbEmployes(resultSet.getInt("nbEmployes"));
                         agence1.setVille((Ville)ville.findById(resultSet.getInt("ville")));
-                        agence1.add(agence1);
+                        agence.add(agence1);
                     }
                 } catch (SQLException e) {
                     throw new DaoException(e);

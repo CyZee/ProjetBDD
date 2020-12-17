@@ -46,7 +46,7 @@ public class ClientDaoImpl extends JdbcDao {
                 client1.setAdresse(resultSet.getString("adresseClient"));
                 client1.setCodePostal(resultSet.getString("codePostalClient"));
                 client1.setVille((Ville)ville.findById(resultSet.getInt("ville")));
-                client1.add(client1);
+                client.add(client1);
             }
         } catch (SQLException e) {
             throw new DaoException(e);

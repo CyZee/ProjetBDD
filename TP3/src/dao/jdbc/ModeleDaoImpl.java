@@ -42,7 +42,7 @@ public class ModeleDaoImpl extends JdbcDao {
                 modele1.setId(resultSet.getInt("id"));
                 modele1.setLibelle(resultSet.getString("libelle"));
                 modele1.setPuissanceFiscale(resultSet.getInt("puissanceFiscale"));
-                modele1.add(modele1);
+                modele.add(modele1);
             }
         } catch (SQLException e) {
             throw new DaoException(e);

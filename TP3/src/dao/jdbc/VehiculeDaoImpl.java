@@ -55,7 +55,7 @@ public class VehiculeDaoImpl extends JdbcDao {
                 vehicule1.setCategorie((Categorie)categorie.findById(resultSet.getInt("categorie")));
                 vehicule1.setType((Type)type.findById(resultSet.getInt("type")));
                 vehicule1.setAgence((Agence)agence.findById(resultSet.getInt("agence")));
-                vehicule1.add(vehicule1);
+                vehicule.add(vehicule1);
             }
         } catch (SQLException e) {
             throw new DaoException(e);

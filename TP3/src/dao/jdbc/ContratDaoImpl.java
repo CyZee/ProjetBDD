@@ -51,7 +51,7 @@ public class ContratDaoImpl extends JdbcDao {
                 contrat1.setClient((Client)client.findById(resultSet.getInt("client")));
                 contrat1.setVehicule((Vehicule)vehicule.findById(resultSet.getInt("immatriculation")));
                 contrat1.setAgence((Agence)agence.findById(resultSet.getInt("agence")));
-                contrat1.add(contrat1);
+                contrat.add(contrat1);
             }
         } catch (SQLException e) {
             throw new DaoException(e);
