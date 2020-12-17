@@ -46,8 +46,7 @@ public class Modele extends Entity {
     public int getPuissanceFiscale() {
         return puissanceFiscale;
     }
-
-    public void setPuissancePascale(int puissanceFiscale) {
+    public void setPuissanceFiscale(int puissanceFiscale) {
         this.puissanceFiscale = puissanceFiscale;
     }
 }

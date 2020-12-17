@@ -4,12 +4,12 @@ import dao.Dao;
 import dao.exception.DaoException;
 import model.Entity;
 import model.Ville;
-import model.Agance;
+import model.Agence;
 import model.Marque;
 import model.Client;
 import model.Vehicule;
 import model.Type;
-import model.Cetagorie;
+import model.Categorie;
 import model.Modele;
 import model.Contrat;
 import model.Facture;
@@ -38,11 +38,11 @@ public class ModeleDaoImpl extends JdbcDao {
             ResultSet resultSet = statement.executeQuery("SELECT * FROM marque");
 
             while (resultSet.next()) {
-                Modele modele = new Modele();
-                modele.setId(resultSet.getInt("id"));
-                modele.setLibelle(resultSet.getString("libelle"));
-                modele.setPuissanceFiscale(resultSet.getInt("puissanceFiscale"));
-                modele.add(modele);
+                Modele modele1 = new Modele();
+                modele1.setId(resultSet.getInt("id"));
+                modele1.setLibelle(resultSet.getString("libelle"));
+                modele1.setPuissanceFiscale(resultSet.getInt("puissanceFiscale"));
+                modele1.add(modele1);
             }
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -52,11 +52,11 @@ public class ModeleDaoImpl extends JdbcDao {
     }
 
     @Override
-    public Entity findById(int id) throws DaoException {
+    public  Modele findById(int id) throws DaoException {
         Modele modele = new Modele();
 
         try {
-            Statement statement = connexion.createStatement();
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM modele WHERE id="+id);
 
             while (resultSet.next()) {
@@ -88,7 +88,7 @@ public class ModeleDaoImpl extends JdbcDao {
 
             stmt = connection.prepareStatement(sqlReq);
 
-            stmt = connexion.prepareStatement(sqlReq);
+            stmt = connection.prepareStatement(sqlReq);
             stmt.setString(1, ((Modele)entity).getLibelle());
             stmt.setInt(2, ((Modele)entity).getPuissanceFiscale());
 
@@ -110,8 +110,8 @@ public class ModeleDaoImpl extends JdbcDao {
         PreparedStatement stmt= null;
         String sqlReq = "update modele set libelle = ?, puissanceFiscale = ? where id = ?";
         try {
-            stmt = connexion.prepareStatement(sqlReq);
-            stmt.setString(1,((Modele)entity).getlibelle());
+            stmt = connection.prepareStatement(sqlReq);
+            stmt.setString(1,((Modele)entity).getLibelle());
             stmt.setInt(2, ((Modele)entity).getPuissanceFiscale());
 
 
@@ -129,7 +129,7 @@ public class ModeleDaoImpl extends JdbcDao {
         String sqlReq = "delete from modele where id = ?";
 
         try {
-            stmt = connexion.prepareStatement(sqlReq);
+            stmt = connection.prepareStatement(sqlReq);
             stmt.setInt(1,((Modele) entity).getId());
             stmt.executeUpdate();
         } catch (SQLException e) {

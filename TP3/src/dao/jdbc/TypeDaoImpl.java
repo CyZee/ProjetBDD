@@ -4,12 +4,12 @@ import dao.Dao;
 import dao.exception.DaoException;
 import model.Entity;
 import model.Ville;
-import model.Agance;
+import model.Agence;
 import model.Marque;
 import model.Client;
 import model.Vehicule;
 import model.Type;
-import model.Cetagorie;
+import model.Categorie;
 import model.Modele;
 import model.Contrat;
 import model.Facture;
@@ -20,7 +20,7 @@ import java.util.Collection;
 
 public class TypeDaoImpl extends JdbcDao {
 
-    private TypeDaoImpl typeDao;
+
 
     public TypeDaoImpl(Connection connection) {
         super(connection);
@@ -38,10 +38,10 @@ public class TypeDaoImpl extends JdbcDao {
             ResultSet resultSet = statement.executeQuery("SELECT * FROM type");
 
             while (resultSet.next()) {
-                Type type = new Type();
-                type.setId(resultSet.getInt("id"));
-                type.setLibelle(resultSet.getString("libelle"));
-                type.add(type);
+                Type type1 = new Type();
+                type1.setId(resultSet.getInt("id"));
+                type1.setLibelle(resultSet.getString("libelle"));
+                type1.add(type1);
             }
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -51,11 +51,11 @@ public class TypeDaoImpl extends JdbcDao {
     }
 
     @Override
-    public Entity findById(int id) throws DaoException {
+    public  Type findById(int id) throws DaoException {
         Type type = new Type();
 
         try {
-            Statement statement = connexion.createStatement();
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM type WHERE id="+id);
 
             while (resultSet.next()) {
@@ -86,7 +86,7 @@ public class TypeDaoImpl extends JdbcDao {
 
             stmt = connection.prepareStatement(sqlReq);
 
-            stmt = connexion.prepareStatement(sqlReq);
+            stmt = connection.prepareStatement(sqlReq);
             stmt.setString(1, ((Type)entity).getLibelle());
 
 
@@ -107,7 +107,7 @@ public class TypeDaoImpl extends JdbcDao {
         PreparedStatement stmt= null;
         String sqlReq = "update type set libelle = ? where id = ?";
         try {
-            stmt = connexion.prepareStatement(sqlReq);
+            stmt = connection.prepareStatement(sqlReq);
             stmt.setString(1,((Type)entity).getLibelle());
 
 
@@ -125,7 +125,7 @@ public class TypeDaoImpl extends JdbcDao {
         String sqlReq = "delete from type where id = ?";
 
         try {
-            stmt = connexion.prepareStatement(sqlReq);
+            stmt = connection.prepareStatement(sqlReq);
             stmt.setInt(1,((Type) entity).getId());
             stmt.executeUpdate();
         } catch (SQLException e) {

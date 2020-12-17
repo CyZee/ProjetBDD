@@ -4,12 +4,12 @@ import dao.Dao;
 import dao.exception.DaoException;
 import model.Entity;
 import model.Ville;
-import model.Agance;
+import model.Agence;
 import model.Marque;
 import model.Client;
 import model.Vehicule;
 import model.Type;
-import model.Cetagorie;
+import model.Categorie;
 import model.Modele;
 import model.Contrat;
 import model.Facture;
@@ -18,7 +18,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class Agence extends JdbcDao {
+public class AgenceDaoImpl extends JdbcDao {
 
     private AgenceDaoImpl AgenceDao;
 
@@ -38,11 +38,14 @@ public class Agence extends JdbcDao {
                     ResultSet resultSet = statement.executeQuery("SELECT * FROM agence");
 
                     while (resultSet.next()) {
-                        Agence agence = new Agence();
-                        agence.setId(resultSet.getInt("idid"));
-                        agence.setNbEmployes(resultSet.getString("nbEmployes")):
-                        agence.setVille((Ville)villeDaoImpl.findById(resultSet.getInt("ville")));
-                        agence.add(agence);
+
+                        VilleDaoImpl ville = new VilleDaoImpl(connection);
+
+                        Agence agence1 = new Agence();
+                        agence1.setId(resultSet.getInt("id"));
+                        agence1.setNbEmployes(resultSet.getInt("nbEmployes"));
+                        agence1.setVille((Ville)ville.findById(resultSet.getInt("ville")));
+                        agence1.add(agence1);
                     }
                 } catch (SQLException e) {
                     throw new DaoException(e);
@@ -52,20 +55,21 @@ public class Agence extends JdbcDao {
     }
 
     @Override
-    public Entity findById(int id) throws DaoException {
+    public  Agence findById(int id) throws DaoException {
         Agence agence = new Agence();
 
                 try {
-                    Statement statement = connexion.createStatement();
+                    Statement statement = connection.createStatement();
                     ResultSet resultSet = statement.executeQuery("SELECT * FROM agence WHERE id="+id);
 
                     while (resultSet.next()) {
-                        VilleRepository villeRepository = new VilleRepository();
+
+                        VilleDaoImpl ville = new VilleDaoImpl(connection);
 
                         agence.setId(resultSet.getInt("id"));
                         agence.setNbEmployes(resultSet.getInt("nbEmployes"));
 
-                        agence.setVille((Ville)villeRepository.findById(resultSet.getInt("ville")));
+                        agence.setVille((Ville) ville.findById(resultSet.getInt("ville")));
 
                     }
                 } catch (SQLException e) {
@@ -88,8 +92,8 @@ public class Agence extends JdbcDao {
 
             stmt = connection.prepareStatement(sqlReq);
 
-            stmt = connexion.prepareStatement(sqlReq);
-            stmt.setString(1, ((Agence)entity).getNbEmployes());
+            stmt = connection.prepareStatement(sqlReq);
+            stmt.setInt(1, ((Agence)entity).getNbEmployes());
 
             stmt.setInt(2, ((Agence)entity).getVille().getId());
 
@@ -110,8 +114,8 @@ public class Agence extends JdbcDao {
         PreparedStatement stmt= null;
         String sqlReq = "update agence set nbEmployes = ?,ville = ? where id = ?";
         try {
-                    stmt = connexion.prepareStatement(sqlReq);
-                    stmt.setString(1,((Agence)entity).getNbEmployes());
+                    stmt = connection.prepareStatement(sqlReq);
+                    stmt.setInt(1,((Agence)entity).getNbEmployes());
 
                     stmt.setInt(2,((Agence)entity).getVille().getId());
 
@@ -129,7 +133,7 @@ public class Agence extends JdbcDao {
         String sqlReq = "delete from agence where id = ?";
 
         try {
-                    stmt = connexion.prepareStatement(sqlReq);
+                    stmt = connection.prepareStatement(sqlReq);
                     stmt.setInt(1,((Agence) entity).getId());
                     stmt.executeUpdate();
                 } catch (SQLException e) {

@@ -4,12 +4,12 @@ import dao.Dao;
 import dao.exception.DaoException;
 import model.Entity;
 import model.Ville;
-import model.Agance;
+import model.Agence;
 import model.Marque;
 import model.Client;
 import model.Vehicule;
 import model.Type;
-import model.Cetagorie;
+import model.Categorie;
 import model.Modele;
 import model.Contrat;
 import model.Facture;
@@ -38,34 +38,36 @@ public class FactureDaoImpl extends JdbcDao {
             ResultSet resultSet = statement.executeQuery("SELECT * FROM marque");
 
             while (resultSet.next()) {
-                Facture modele = new Facture();
-                facture.setId(resultSet.getInt("id"));
-                facture.setMontant(resultSet.getString("montant"));
-                facture.setContrat((Contrat)contratDaoImpl.findById(resultSet.getInt("contrat")));
-                facture.add(facture);
+                ContratDaoImpl contrat = new ContratDaoImpl(connection);
+
+                Facture facture1 = new Facture();
+                facture1.setId(resultSet.getInt("id"));
+                facture1.setMontant(resultSet.getInt("montant"));
+                facture1.setContrat((Contrat)contrat.findById(resultSet.getInt("contrat")));
+                facture1.add(facture1);
             }
         } catch (SQLException e) {
             throw new DaoException(e);
         }
 
-        return modele;
+        return facture;
     }
 
     @Override
-    public Entity findById(int id) throws DaoException {
+    public Facture findById(int id) throws DaoException {
         Facture facture = new Facture();
 
         try {
-            Statement statement = connexion.createStatement();
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM facture WHERE id="+id);
 
             while (resultSet.next()) {
-                ContratRepository contratRepository = new ContratRepository();
+                ContratDaoImpl contrat = new ContratDaoImpl(connection);
 
 
-                modele.setId(resultSet.getInt("id"));
-                modele.setMontant(resultSet.getInt("montant"));
-                modele.setContrat((Contrat)contratRepository.findById(resultSet.getInt("contrat")));
+                facture.setId(resultSet.getInt("id"));
+                facture.setMontant(resultSet.getInt("montant"));
+                facture.setContrat((Contrat)contrat.findById(resultSet.getInt("contrat")));
 
 
             }
@@ -79,7 +81,7 @@ public class FactureDaoImpl extends JdbcDao {
     @Override
     public void create(Entity entity) throws DaoException {
 
-        Facture modele = (Facture) entity;
+        Facture facture = (Facture) entity;
 
         PreparedStatement stmt= null;
 
@@ -89,9 +91,9 @@ public class FactureDaoImpl extends JdbcDao {
 
             stmt = connection.prepareStatement(sqlReq);
 
-            stmt = connexion.prepareStatement(sqlReq);
-            stmt.setString(1, ((Facture)entity).getMontant());
-            stmt.setInt(2, ((Facture)entity).getContrat().getID());
+            stmt = connection.prepareStatement(sqlReq);
+            stmt.setInt(1, ((Facture)entity).getMontant());
+            stmt.setInt(2, ((Facture)entity).getContrat().getId());
 
 
 
@@ -111,8 +113,8 @@ public class FactureDaoImpl extends JdbcDao {
         PreparedStatement stmt= null;
         String sqlReq = "update facture set montant = ?, contrat = ? where id = ?";
         try {
-            stmt = connexion.prepareStatement(sqlReq);
-            stmt.setString(1,((Facture)entity).getMontant());
+            stmt = connection.prepareStatement(sqlReq);
+            stmt.setInt(1,((Facture)entity).getMontant());
             stmt.setInt(2, ((Facture)entity).getContrat().getId());
 
 
@@ -130,7 +132,7 @@ public class FactureDaoImpl extends JdbcDao {
         String sqlReq = "delete from facture where id = ?";
 
         try {
-            stmt = connexion.prepareStatement(sqlReq);
+            stmt = connection.prepareStatement(sqlReq);
             stmt.setInt(1,((Facture) entity).getId());
             stmt.executeUpdate();
         } catch (SQLException e) {

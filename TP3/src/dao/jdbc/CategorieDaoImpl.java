@@ -4,12 +4,12 @@ import dao.Dao;
 import dao.exception.DaoException;
 import model.Entity;
 import model.Ville;
-import model.Agance;
+import model.Agence;
 import model.Marque;
 import model.Client;
 import model.Vehicule;
 import model.Type;
-import model.Cetagorie;
+import model.Categorie;
 import model.Modele;
 import model.Contrat;
 import model.Facture;
@@ -38,10 +38,10 @@ public class CategorieDaoImpl extends JdbcDao {
             ResultSet resultSet = statement.executeQuery("SELECT * FROM marque");
 
             while (resultSet.next()) {
-                Categorie categorie = new Categorie();
-                categorie.setId(resultSet.getInt("id"));
-                categorie.setLibelle(resultSet.getString("libelle"));
-                categorie.add(categorie);
+                Categorie categorie1 = new Categorie();
+                categorie1.setId(resultSet.getInt("id"));
+                categorie1.setLibelle(resultSet.getString("libelle"));
+                categorie1.add(categorie1);
             }
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -51,11 +51,11 @@ public class CategorieDaoImpl extends JdbcDao {
     }
 
     @Override
-    public Entity findById(int id) throws DaoException {
+    public  Categorie findById(int id) throws DaoException {
         Categorie categorie = new Categorie();
 
         try {
-            Statement statement = connexion.createStatement();
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM categorie WHERE id="+id);
 
             while (resultSet.next()) {
@@ -86,7 +86,7 @@ public class CategorieDaoImpl extends JdbcDao {
 
             stmt = connection.prepareStatement(sqlReq);
 
-            stmt = connexion.prepareStatement(sqlReq);
+            stmt = connection.prepareStatement(sqlReq);
             stmt.setString(1, ((Categorie)entity).getLibelle());
 
 
@@ -107,8 +107,8 @@ public class CategorieDaoImpl extends JdbcDao {
         PreparedStatement stmt= null;
         String sqlReq = "update categorie set libelle = ? where id = ?";
         try {
-            stmt = connexion.prepareStatement(sqlReq);
-            stmt.setString(1,((Categorie)entity).getlibelle());
+            stmt = connection.prepareStatement(sqlReq);
+            stmt.setString(1,((Categorie)entity).getLibelle());
 
 
             stmt.setInt(2,((Categorie) entity).getId());
@@ -125,7 +125,7 @@ public class CategorieDaoImpl extends JdbcDao {
         String sqlReq = "delete from categorie where id = ?";
 
         try {
-            stmt = connexion.prepareStatement(sqlReq);
+            stmt = connection.prepareStatement(sqlReq);
             stmt.setInt(1,((Categorie) entity).getId());
             stmt.executeUpdate();
         } catch (SQLException e) {

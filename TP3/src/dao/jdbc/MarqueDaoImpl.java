@@ -4,12 +4,12 @@ import dao.Dao;
 import dao.exception.DaoException;
 import model.Entity;
 import model.Ville;
-import model.Agance;
+import model.Agence;
 import model.Marque;
 import model.Client;
 import model.Vehicule;
 import model.Type;
-import model.Cetagorie;
+import model.Categorie;
 import model.Modele;
 import model.Contrat;
 import model.Facture;
@@ -38,10 +38,10 @@ public class MarqueDaoImpl extends JdbcDao {
                     ResultSet resultSet = statement.executeQuery("SELECT * FROM marque");
 
                     while (resultSet.next()) {
-                        Marque marque = new Marque();
-                        marque.setId(resultSet.getInt("id"));
-                        marque.setNomMarque(resultSet.getString("nomMarque"));
-                        marque.add(marque);
+                        Marque marque1 = new Marque();
+                        marque1.setId(resultSet.getInt("id"));
+                        marque1.setNomMarque(resultSet.getString("nomMarque"));
+                        marque1.add(marque1);
                     }
                 } catch (SQLException e) {
                     throw new DaoException(e);
@@ -51,18 +51,18 @@ public class MarqueDaoImpl extends JdbcDao {
     }
 
     @Override
-    public Entity findById(int id) throws DaoException {
+    public  Marque findById(int id) throws DaoException {
         Marque marque = new Marque();
 
         try {
-            Statement statement = connexion.createStatement();
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM marque WHERE id="+id);
 
             while (resultSet.next()) {
 
 
-                agence.setId(resultSet.getInt("id"));
-                agence.setNomMarque(resultSet.getString("nomMarque"));
+                marque.setId(resultSet.getInt("id"));
+                marque.setNomMarque(resultSet.getString("nomMarque"));
 
 
             }
@@ -86,7 +86,7 @@ public class MarqueDaoImpl extends JdbcDao {
 
             stmt = connection.prepareStatement(sqlReq);
 
-            stmt = connexion.prepareStatement(sqlReq);
+            stmt = connection.prepareStatement(sqlReq);
             stmt.setString(1, ((Marque)entity).getNomMarque());
 
 
@@ -107,7 +107,7 @@ public class MarqueDaoImpl extends JdbcDao {
         PreparedStatement stmt= null;
         String sqlReq = "update marque set nomMarque = ? where id = ?";
         try {
-            stmt = connexion.prepareStatement(sqlReq);
+            stmt = connection.prepareStatement(sqlReq);
             stmt.setString(1,((Marque)entity).getNomMarque());
 
 
@@ -125,7 +125,7 @@ public class MarqueDaoImpl extends JdbcDao {
         String sqlReq = "delete from marque where id = ?";
 
         try {
-            stmt = connexion.prepareStatement(sqlReq);
+            stmt = connection.prepareStatement(sqlReq);
             stmt.setInt(1,((Marque) entity).getId());
             stmt.executeUpdate();
         } catch (SQLException e) {

@@ -102,6 +102,14 @@ public class Contrat extends Entity {
         this.kmRetour = kmRetour;
     }
 
+    public Vehicule getVehicule() {
+        return vehicule;
+    }
+
+    public void setVehicule(Vehicule vehicule) {
+        this.vehicule = vehicule;
+    }
+
     public Client getClient() {
         return client;
     }

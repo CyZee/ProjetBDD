@@ -4,12 +4,12 @@ import dao.Dao;
 import dao.exception.DaoException;
 import model.Entity;
 import model.Ville;
-import model.Agance;
+import model.Agence;
 import model.Marque;
 import model.Client;
 import model.Vehicule;
 import model.Type;
-import model.Cetagorie;
+import model.Categorie;
 import model.Modele;
 import model.Contrat;
 import model.Facture;
@@ -38,23 +38,27 @@ public class ContratDaoImpl extends JdbcDao {
             ResultSet resultSet = statement.executeQuery("SELECT * FROM contrat");
 
             while (resultSet.next()) {
-                Contrat contrat = new Contrat();
-                contrat.setId(resultSet.getInt("id"));
-                contrat.setDateDeRetrait(resultSet.getString("dateDeRetrait"));
-                contrat.setDateDeRetour(resultSet.getString("dateDeRetour"));
-                contrat.setKmRetrait(resultSet.getInt("kmRetrait"));
-                contrat.setKmRetour(resultSet.getInt("kmRetour"));
-                contrat.setClient((Client)clientDaoImpl.findById(resultSet.getInt("client")));
-                contrat.setVehicule((Vehicule)vehiculeDaoImpl.findById(resultSet.getInt("vehicule")));
-                contrat.setAgence((Agence)agenceDaoImpl.findById(resultSet.getInt("agence")));
-                contrat.setImmatriculation(resultSet.getString("immatriculation"));
-                contrat.add(contrat);
+                ClientDaoImpl client = new ClientDaoImpl(connection);
+                VehiculeDaoImpl vehicule = new VehiculeDaoImpl(connection);
+                AgenceDaoImpl agence = new AgenceDaoImpl(connection);
+
+                Contrat contrat1 = new Contrat();
+                contrat1.setId(resultSet.getInt("id"));
+                contrat1.setDateDeRetrait(resultSet.getString("dateDeRetrait"));
+                contrat1.setDateDeRetour(resultSet.getString("dateDeRetour"));
+                contrat1.setKmRetrait(resultSet.getInt("kmRetrait"));
+                contrat1.setKmRetour(resultSet.getInt("kmRetour"));
+                contrat1.setClient((Client)client.findById(resultSet.getInt("client")));
+                contrat1.setVehicule((Vehicule)vehicule.findById(resultSet.getInt("vehicule")));
+                contrat1.setAgence((Agence)agence.findById(resultSet.getInt("agence")));
+                contrat1.setImmatriculation(resultSet.getString("immatriculation"));
+                contrat1.add(contrat1);
             }
         } catch (SQLException e) {
             throw new DaoException(e);
         }
 
-        return modele;
+        return contrat;
     }
 
     @Override
@@ -62,14 +66,14 @@ public class ContratDaoImpl extends JdbcDao {
         Contrat contrat = new Contrat();
 
         try {
-            Statement statement = connexion.createStatement();
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM contrat WHERE id="+id);
 
             while (resultSet.next()) {
 
-                ClientRepository clientRepository = new ClientRepository();
-                VehiculeRepository vehiculeRepository = new VehiculeRepository();
-                AgenceRepository agenceRepository = new AgenceRepository();
+                ClientDaoImpl client = new ClientDaoImpl(connection);
+                VehiculeDaoImpl vehicule = new VehiculeDaoImpl(connection);
+                AgenceDaoImpl agence = new AgenceDaoImpl(connection);
 
 
 
@@ -78,9 +82,9 @@ public class ContratDaoImpl extends JdbcDao {
                 contrat.setDateDeRetour(resultSet.getString("dateDeRetour"));
                 contrat.setKmRetrait(resultSet.getInt("kmRetrait"));
                 contrat.setKmRetour(resultSet.getInt("kmRetour"));
-                contrat.setClient((Client)clientRepository.findById(resultSet.getInt("client")));
-                contrat.setVehicule((Vehicule)vehiculeRepository.findById(resultSet.getInt("vehicule")));
-                contrat.setAgence((Agence)agenceRepository.findById(resultSet.getInt("agence")));
+                contrat.setClient((Client)client.findById(resultSet.getInt("client")));
+                contrat.setVehicule((Vehicule)vehicule.findById(resultSet.getInt("vehicule")));
+                contrat.setAgence((Agence) agence.findById(resultSet.getInt("agence")));
                 contrat.setImmatriculation(resultSet.getString("immatriculation"));
 
 
@@ -105,7 +109,7 @@ public class ContratDaoImpl extends JdbcDao {
 
             stmt = connection.prepareStatement(sqlReq);
 
-            stmt = connexion.prepareStatement(sqlReq);
+            stmt = connection.prepareStatement(sqlReq);
             stmt.setString(1, ((Contrat)entity).getDateDeRetrait());
             stmt.setString(2, ((Contrat)entity).getDateDeRetour());
             stmt.setInt(3, ((Contrat)entity).getKmRetrait());
@@ -133,7 +137,7 @@ public class ContratDaoImpl extends JdbcDao {
         PreparedStatement stmt= null;
         String sqlReq = "update contrat set dateDeRetrait = ?, dateDeRetour = ?, kmRetrait = ?, kmRetour = ?, client = ?, vehicule = ?, agence = ?, immatriculation = ?  where id = ?";
         try {
-            stmt = connexion.prepareStatement(sqlReq);
+            stmt = connection.prepareStatement(sqlReq);
             stmt.setString(1, ((Contrat)entity).getDateDeRetrait());
             stmt.setString(2, ((Contrat)entity).getDateDeRetour());
             stmt.setInt(3, ((Contrat)entity).getKmRetrait());
@@ -158,7 +162,7 @@ public class ContratDaoImpl extends JdbcDao {
         String sqlReq = "delete from contrat where id = ?";
 
         try {
-            stmt = connexion.prepareStatement(sqlReq);
+            stmt = connection.prepareStatement(sqlReq);
             stmt.setInt(1,((Contrat) entity).getId());
             stmt.executeUpdate();
         } catch (SQLException e) {

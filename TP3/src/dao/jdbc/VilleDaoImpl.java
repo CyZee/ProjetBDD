@@ -3,12 +3,12 @@ package dao.jdbc;//package dao.jdbc;
 import dao.exception.DaoException;
 import model.Entity;
 import model.Ville;
-import model.Agance;
+import model.Agence;
 import model.Marque;
 import model.Client;
 import model.Vehicule;
 import model.Type;
-import model.Cetagorie;
+import model.Categorie;
 import model.Modele;
 import model.Contrat;
 import model.Facture;
@@ -19,10 +19,10 @@ import java.util.Collection;
 
 public class VilleDaoImpl extends JdbcDao {
 
-    public VilleDaoImpl(Connection connection) {
+
+    public VilleDaoImpl(Connection connection) throws DaoException {
         super(connection);
     }
-
 
     @Override
     public Collection<Entity> findAll() throws DaoException {
@@ -33,11 +33,11 @@ public class VilleDaoImpl extends JdbcDao {
             ResultSet resultSet = statement.executeQuery("SELECT * FROM ville");
 
             while (resultSet.next()) {
-                Ville ville = new Ville();
-                ville.setId(resultSet.getInt("id"));
-                ville.setNom(resultSet.getString("nom"));
-                ville.setId(resultSet.getInt("nombreHabitants"));
-                ville.add(ville);
+                Ville ville1 = new Ville();
+                ville1.setId(resultSet.getInt("id"));
+                ville1.setNom(resultSet.getString("nom"));
+                ville1.setId(resultSet.getInt("nombreHabitants"));
+                ville1.add(ville1);
             }
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -47,24 +47,24 @@ public class VilleDaoImpl extends JdbcDao {
     }
 
     @Override
-    public Entity findById(int id) throws DaoException {
+    public Ville findById(int id) throws DaoException {
 
        Ville ville = new Ville();
 
-               try {
-                   Statement statement = connexion.createStatement();
-                   ResultSet resultSet = statement.executeQuery("SELECT * FROM ville WHERE id="+id);
+       try {
+           Statement statement = connection.createStatement();
+           ResultSet resultSet = statement.executeQuery("SELECT * FROM ville WHERE id="+id);
 
-                   while (resultSet.next()) {
-                       ville.setId(resultSet.getInt("id"));
-                       ville.setNom(resultSet.getString("nom"));
-                       ville.setId(resultSet.getInt("nombreHabitants"));
-                   }
-               } catch (SQLException e) {
-                   System.err.println("Erreur SQL : " + e.getLocalizedMessage());
-               }
+           while (resultSet.next()) {
+               ville.setId(resultSet.getInt("id"));
+               ville.setNom(resultSet.getString("nom"));
+               ville.setNombreHabitants(resultSet.getInt("nombreHabitants"));
+           }
+       } catch (SQLException e) {
+           System.err.println("Erreur SQL : " + e.getLocalizedMessage());
+       }
 
-               return ville;
+       return ville;
 
     }
 
@@ -84,7 +84,7 @@ public class VilleDaoImpl extends JdbcDao {
             // stmt.setInt(1, 5);
 
             stmt.setString(1, ville.getNom());
-            stmt.setString(2, ville.getNombreHabitants());
+            stmt.setInt(2, ville.getNombreHabitants());
 
             int res = stmt.executeUpdate();
             if (res > 0) {
@@ -103,9 +103,9 @@ public class VilleDaoImpl extends JdbcDao {
         PreparedStatement stmt= null;
         String sqlReq = "update ville set nom = ?, nombreHabitants = ? where id = ?";
         try {
-                    stmt = connexion.prepareStatement(sqlReq);
+                    stmt = connection.prepareStatement(sqlReq);
                     stmt.setString(1,((Ville)entity).getNom());
-                    stmt.setString(2,((Ville)entity).getNombreHabitants());
+                    stmt.setInt(2,((Ville)entity).getNombreHabitants());
                     stmt.setInt(3,((Ville) entity).getId());
                     stmt.executeUpdate();
                 } catch (SQLException e) {
@@ -119,7 +119,7 @@ public class VilleDaoImpl extends JdbcDao {
         String sqlReq = "delete from ville where id = ?";
 
         try {
-                    stmt = connexion.prepareStatement(sqlReq);
+                    stmt = connection.prepareStatement(sqlReq);
                     stmt.setInt(1,((Ville) entity).getId());
                     stmt.executeUpdate();
                 } catch (SQLException e) {
