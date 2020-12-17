@@ -4,19 +4,21 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class PostgresConnection {
+public class PostgresConnectionTemplate {
 
-    private static String serveur = "localhost";
-    private static String baseName = "postgres";
-    private static String user = "leo";
-    private static String password = "leo";
+    // Use this template to create a "PostgresConnection.java"
+
+    private final static String server = "localhost";
+    private final static String baseName = "postgres";
+    private final static String user = "login";
+    private final static String password = "password";
 
     private static Connection connection;
 
     public static Connection getInstance() {
 
         if (connection == null) {
-            String url = "jdbc:postgresql://" + serveur + "/" + baseName;
+            String url = "jdbc:postgresql://" + server + "/" + baseName;
             try {
                 connection = DriverManager.getConnection(url, user, password );
             } catch (SQLException throwables) {
