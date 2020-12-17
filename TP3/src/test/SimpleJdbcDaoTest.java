@@ -296,6 +296,8 @@ public class SimpleJdbcDaoTest {
 
 
 
+
+
     public void test() throws DaoException{
         connection = PostgresConnection.getInstance();
 
@@ -395,6 +397,8 @@ public class SimpleJdbcDaoTest {
 
         System.out.println("***** Liste des factures : ");
         testFindAllFacture();
+
+
 
 
 

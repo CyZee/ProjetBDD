@@ -118,7 +118,7 @@ public class FactureDaoImpl extends JdbcDao {
             stmt.setInt(2, ((Facture)entity).getContrat().getId());
 
 
-            stmt.setInt(3,((Modele) entity).getId());
+            stmt.setInt(3,((Facture) entity).getId());
             stmt.executeUpdate();
         } catch (SQLException e) {
             System.err.println("Erreur SQL : " + e.getLocalizedMessage());
